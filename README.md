@@ -1,4 +1,4 @@
 # SAAM
 
-Specialist: Felix Pang \n
+Specialist: Felix Pang \r\n
 Programmer: Jianfeng Li  Xiaoyi Wang
