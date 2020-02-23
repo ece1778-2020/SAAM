@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>548997403842-aitoo0a9q3pl2i46dac2ml5t1k7bo36u.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.548997403842-aitoo0a9q3pl2i46dac2ml5t1k7bo36u</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDCzOg_UMnT108vp5bOhrCP0fReljg24iY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>548997403842</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>SAAM.SAAMClient</string>
+	<key>PROJECT_ID</key>
+	<string>saam-ba1be</string>
+	<key>STORAGE_BUCKET</key>
+	<string>saam-ba1be.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:548997403842:ios:8652e4677d8d9dea5e975b</string>
+	<key>DATABASE_URL</key>
+	<string>https://saam-ba1be.firebaseio.com</string>
+</dict>
+</plist>

@@ -3,13 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		41F76A3A1037EF166572FD92 /* Pods_SAAMClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 301ECE9D5BBAF7B7EC821321 /* Pods_SAAMClient.framework */; };
 		C640AECC24007833005BAEFE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C640AECB24007833005BAEFE /* LoginViewController.swift */; };
 		C640AECE2400784D005BAEFE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C640AECD2400784D005BAEFE /* ProfileViewController.swift */; };
+		C640AED024021CDB005BAEFE /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C640AECF24021CDB005BAEFE /* Profile.swift */; };
+		C640AED224022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
+		C640AED324022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
+		C640AED424022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
 		C8B744E82400611A00190923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B744E72400611A00190923 /* AppDelegate.swift */; };
 		C8B744EA2400611A00190923 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B744E92400611A00190923 /* SceneDelegate.swift */; };
 		C8B744EC2400611A00190923 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B744EB2400611A00190923 /* ViewController.swift */; };
@@ -43,6 +47,8 @@
 		69BF3C7F581D69826D407E60 /* Pods-SAAMClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SAAMClient.release.xcconfig"; path = "Target Support Files/Pods-SAAMClient/Pods-SAAMClient.release.xcconfig"; sourceTree = "<group>"; };
 		C640AECB24007833005BAEFE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C640AECD2400784D005BAEFE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		C640AECF24021CDB005BAEFE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		C640AED124022FBC005BAEFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C8B744E42400611A00190923 /* SAAMClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SAAMClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B744E72400611A00190923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8B744E92400611A00190923 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,7 +97,6 @@
 				31872FC2AD334F3C93901B8F /* Pods-SAAMClient.debug.xcconfig */,
 				69BF3C7F581D69826D407E60 /* Pods-SAAMClient.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -134,9 +139,11 @@
 				C8B744ED2400611A00190923 /* Main.storyboard */,
 				C8B744F02400611B00190923 /* Assets.xcassets */,
 				C8B744F22400611B00190923 /* LaunchScreen.storyboard */,
+				C640AED124022FBC005BAEFE /* GoogleService-Info.plist */,
 				C8B744F52400611B00190923 /* Info.plist */,
 				C640AECB24007833005BAEFE /* LoginViewController.swift */,
 				C640AECD2400784D005BAEFE /* ProfileViewController.swift */,
+				C640AECF24021CDB005BAEFE /* Profile.swift */,
 			);
 			path = SAAMClient;
 			sourceTree = "<group>";
@@ -266,6 +273,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C8B744F42400611B00190923 /* LaunchScreen.storyboard in Resources */,
+				C640AED224022FBC005BAEFE /* GoogleService-Info.plist in Resources */,
 				C8B744F12400611B00190923 /* Assets.xcassets in Resources */,
 				C8B744EF2400611A00190923 /* Main.storyboard in Resources */,
 			);
@@ -275,6 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C640AED324022FBC005BAEFE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C640AED424022FBC005BAEFE /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +345,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C640AECC24007833005BAEFE /* LoginViewController.swift in Sources */,
+				C640AED024021CDB005BAEFE /* Profile.swift in Sources */,
 				C8B744EC2400611A00190923 /* ViewController.swift in Sources */,
 				C640AECE2400784D005BAEFE /* ProfileViewController.swift in Sources */,
 				C8B744E82400611A00190923 /* AppDelegate.swift in Sources */,
