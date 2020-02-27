@@ -41,8 +41,7 @@ class Profile: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func AssessmentButton(_ sender: UIButton) {
-        print(Auth.auth().currentUser?.displayName)
-        //performSegue(withIdentifier: "AssessmentView", sender: self)
+        performSegue(withIdentifier: "ToQG", sender: self)
     }
     
 
