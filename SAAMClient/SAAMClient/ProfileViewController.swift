@@ -66,7 +66,7 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
             self.errorLabel.text = "Please confirm the password"
         }else if username == ""{
             self.errorLabel.text = "Please provide a username"
-        }else if passwordTextField.text != repeatPasswordTextField.text{
+        }else if password != repeatpass{
             self.errorLabel.text = "password inconsistent"
         }else{
             Auth.auth().createUser(withEmail: email, password: password){
@@ -84,7 +84,7 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
                         else {print("saveProfile failed and per seguae fail")}
                     }
                 }else{
-                    print("Error: \(error!.localizedDescription)")
+                    self.errorLabel.text = error!.localizedDescription
                 }
             }
         }
@@ -108,7 +108,6 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
                     //display error on the screen
                     self.errorLabel.text = error?.localizedDescription
                 }
-                completion(error == nil)
             }
         }
     }
