@@ -41,10 +41,7 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
                 self.userDefault.synchronize()
                 self.performSegue(withIdentifier: "profileView", sender: self)
                 print("signed in performed")
-            }/*else if(error?._code == AuthErrorCode.userNotFound.rawValue){
-                self.createUser(email:email, password: password)
-            }*/
-            else{
+            }else{
                 print(error)
                 print(error?.localizedDescription)
                 print("sign in failed")
@@ -55,43 +52,42 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
     
     
     @IBAction func registerButtonTapped(_ sender: Any) {
-            guard let username = usernameTextField.text else {return}
-            guard let email = emailTextField.text else {return}
-            guard let password = passwordTextField.text else {return}
-            guard let repeatpass = repeatPasswordTextField.text else {return}
-            if passwordTextField.text == repeatPasswordTextField.text {
-                Auth.auth().createUser(withEmail: email, password: password){
-                    user, error in
-                    print("after creating user performed")
-                    if error == nil && user != nil{
-                        //user created
-                        print("user created")
-                        //log in first
-                        self.signInUser(email: email, password: password)
-                        self.saveProfile(username: username) { success in
-                            if success {
-                                self.performSegue(withIdentifier: "profileView", sender: self)
-                                        }
-                            else {print("saveProfile failed and per seguae fail")}
-                                }
-                    } else {
-                            print("Error: \(error!.localizedDescription)")
-                            }
-                        }
-                    } else {
-                   print("password inconsistent")
-                   self.errorLabel.text = "password inconsistent"
-               }
+        guard let username = usernameTextField.text else {return}
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        guard let repeatpass = repeatPasswordTextField.text else {return}
+            
                
-               if email == ""{
-                   self.errorLabel.text = "Please provide an email"
-               }else if password == ""{
-                   self.errorLabel.text = "Please provide a password"
-               }else if repeatpass == ""{
-                   self.errorLabel.text = "Please confirm the password"
-               }else if username == ""{
-                   self.errorLabel.text = "Please provide a username"
-               }
+        if email == ""{
+            self.errorLabel.text = "Please provide an email"
+        }else if password == ""{
+            self.errorLabel.text = "Please provide a password"
+        }else if repeatpass == ""{
+            self.errorLabel.text = "Please confirm the password"
+        }else if username == ""{
+            self.errorLabel.text = "Please provide a username"
+        }else if passwordTextField.text != repeatPasswordTextField.text{
+            self.errorLabel.text = "password inconsistent"
+        }else{
+            Auth.auth().createUser(withEmail: email, password: password){
+            user, error in
+                print("after creating user performed")
+                if error == nil && user != nil{
+                    //user created
+                    print("user created")
+                    //log in first
+                    self.signInUser(email: email, password: password)
+                    self.saveProfile(username: username) { success in
+                        if success {
+                            self.performSegue(withIdentifier: "profileView", sender: self)
+                        }
+                        else {print("saveProfile failed and per seguae fail")}
+                    }
+                }else{
+                    print("Error: \(error!.localizedDescription)")
+                }
+            }
+        }
         
     }
     
@@ -99,16 +95,22 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
         print("back to log in")
         self.dismiss(animated: true, completion: nil)
     }
+    
+    
     func saveProfile(username:String, completion: @escaping ((_ success:Bool)->())) {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        let databaseRef = Database.database().reference().child("users/\(uid)")
         
-        let userObject = [
-            "username": username,
-        ] as [String:Any]
-        
-        databaseRef.setValue(userObject) { error, ref in
-            completion(error == nil)
+        //Change User's auth info
+        if let u = Auth.auth().currentUser{
+            let changeNameRequist = u.createProfileChangeRequest()
+            changeNameRequist.displayName = username
+            changeNameRequist.commitChanges{(error) in
+                if error != nil{
+                    //display error on the screen
+                    self.errorLabel.text = error?.localizedDescription
+                }
+                completion(error == nil)
+            }
         }
     }
+    
 }

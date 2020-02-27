@@ -34,7 +34,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
-    func signInUser(email: String, password: String){
+    func signInUser(email: String, password: String, completion: @escaping ((_ success:Bool)->())){
         Auth.auth().signIn(withEmail: email, password: password) {
             (user, error) in
             if error == nil{
@@ -42,22 +42,29 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("User Signed In")
                 self.userDefault.set(true, forKey: "usersignedin")
                 self.userDefault.synchronize()
-                self.performSegue(withIdentifier: "signinToProfile", sender: self)
+                self.performSegue(withIdentifier: "LogIn", sender: self)
             }
             else{
-                print(error)
-                print(error?.localizedDescription)
+                print(error!)
+                print(error!.localizedDescription)
             }
+            completion(error == nil)
         }
     }
+    
     @IBAction func signinButtonTapped(_ sender: Any) {
         print("Sign in button tapped.");
-            signInUser(email: usernameText.text!, password: userPasswordText.text!)
+        signInUser(email: usernameText.text!, password: userPasswordText.text!){ success in
+            if success {
+            }
+            else {print("signINfail")}
+        }
     }
     
     @IBAction func signupButtonTapped(_ sender: Any) {
         print("Sign up button tapped.");
         performSegue(withIdentifier: "signinToProfile", sender: self)
     }
+    
     
 }

@@ -14,6 +14,7 @@
 		C640AED224022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
 		C640AED324022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
 		C640AED424022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
+		C88BE39624072A8B007E554E /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88BE39524072A8B007E554E /* InitViewController.swift */; };
 		C8B744E82400611A00190923 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B744E72400611A00190923 /* AppDelegate.swift */; };
 		C8B744EA2400611A00190923 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B744E92400611A00190923 /* SceneDelegate.swift */; };
 		C8B744EC2400611A00190923 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B744EB2400611A00190923 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		C640AECD2400784D005BAEFE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C640AECF24021CDB005BAEFE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		C640AED124022FBC005BAEFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C88BE39524072A8B007E554E /* InitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
 		C8B744E42400611A00190923 /* SAAMClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SAAMClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8B744E72400611A00190923 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C8B744E92400611A00190923 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				C640AECB24007833005BAEFE /* LoginViewController.swift */,
 				C640AECD2400784D005BAEFE /* ProfileViewController.swift */,
 				C640AECF24021CDB005BAEFE /* Profile.swift */,
+				C88BE39524072A8B007E554E /* InitViewController.swift */,
 			);
 			path = SAAMClient;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C640AECC24007833005BAEFE /* LoginViewController.swift in Sources */,
+				C88BE39624072A8B007E554E /* InitViewController.swift in Sources */,
 				C640AED024021CDB005BAEFE /* Profile.swift in Sources */,
 				C8B744EC2400611A00190923 /* ViewController.swift in Sources */,
 				C640AECE2400784D005BAEFE /* ProfileViewController.swift in Sources */,

@@ -15,16 +15,16 @@ import FirebaseStorage
 class Profile: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var userNameShow: UILabel!
     let userDefault = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Auth.auth().currentUser != nil{
-            guard let uid = Auth.auth().currentUser?.uid else{return}
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with:{(SAAM) in
-                guard let dict = SAAM.value as? [String: Any] else {return}
-                self.userNameShow.text = dict["username"]as? String ?? ""
-            }, withCancel: {(err) in
-                print(err)
-            })
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print(Auth.auth().currentUser?.uid)
+        if let username = Auth.auth().currentUser?.displayName {
+            self.userNameShow.text = username;
         }
     }
     
@@ -40,6 +40,10 @@ class Profile: UIViewController,UITextFieldDelegate {
         }
     }
     
-
+    @IBAction func AssessmentButton(_ sender: UIButton) {
+        print(Auth.auth().currentUser?.displayName)
+        //performSegue(withIdentifier: "AssessmentView", sender: self)
+    }
+    
 
 }
