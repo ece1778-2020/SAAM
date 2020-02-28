@@ -79,17 +79,21 @@ class MTSelectionViewController: UIViewController {
     }
     
     func Asking_alert(_ Asking:String, _ dic: [String:Any]){
-        let alert = UIAlertController(title: "Asking", message: Asking, preferredStyle: .alert)
-        let True_action = UIAlertAction(title: "Accept", style: .default){(action)in
-            self.nexts.append(dic["next"] as! String)
+        if self.nexts.contains(dic["next"] as! String){
             self.AnswerProcessing()
+        }else{
+            let alert = UIAlertController(title: "Asking", message: Asking, preferredStyle: .alert)
+            let True_action = UIAlertAction(title: "Accept", style: .default){(action)in
+                self.nexts.append(dic["next"] as! String)
+                self.AnswerProcessing()
+            }
+            let False_action = UIAlertAction(title: "Refuse", style: .default){(action)in
+                self.AnswerProcessing()
+            }
+            alert.addAction(True_action)
+            alert.addAction(False_action)
+            present(alert,animated: true, completion: nil)
         }
-        let False_action = UIAlertAction(title: "Refuse", style: .default){(action)in
-            self.AnswerProcessing()
-        }
-        alert.addAction(True_action)
-        alert.addAction(False_action)
-        present(alert,animated: true, completion: nil)
     }
     
     func AnswerProcessing(){
