@@ -3,6 +3,7 @@
 //  SAAMClient
 //
 //  Created by AdamLi on 2020/2/22.
+//  Modified by Xiaoyi Wang on 2020/2/27
 //  Copyright © 2020 SAAM. All rights reserved.
 //
 
@@ -23,6 +24,7 @@ class Profile: UIViewController,UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         print(Auth.auth().currentUser?.uid)
+        //Get the username of the current user
         if let username = Auth.auth().currentUser?.displayName {
             self.userNameShow.text = username;
         }
@@ -31,9 +33,9 @@ class Profile: UIViewController,UITextFieldDelegate {
     @IBAction func signoutButtonTapped(_ sender: Any) {
         do{
             try Auth.auth().signOut()
+            //signout
             userDefault.removeObject(forKey: "usersignedin")
             userDefault.synchronize()
-            //self.dismiss(animated: true, completion: nil)
             performSegue(withIdentifier: "backtoSignIn", sender: self)
         } catch let error as NSError{
             print(error.localizedDescription)
@@ -41,6 +43,7 @@ class Profile: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func AssessmentButton(_ sender: UIButton) {
+        //Go to Question Generator
         performSegue(withIdentifier: "ToQG", sender: self)
     }
     

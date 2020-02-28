@@ -14,6 +14,7 @@ class TenChoicesViewController: UIViewController {
 
     var Questionid:String?
     var LowerThan:[Int] = []
+    var ClassDic:[Int:[String:Any]] = [:]
     @IBOutlet weak var body: UILabel!
     
     override func viewDidLoad() {
@@ -22,6 +23,7 @@ class TenChoicesViewController: UIViewController {
     
     //init firestore and firebase storage
     let db = Firestore.firestore()
+    
     
     override func viewDidAppear(_ animated: Bool) {
         let Question_ref = db.collection("Questions").document("ESSAS_Main").collection("Questions").document(Questionid!)
@@ -40,13 +42,61 @@ class TenChoicesViewController: UIViewController {
             if snapshot != nil{
                     for document in snapshot!.documents{
                     self.LowerThan.append(Int(document.documentID)!)
+                        self.ClassDic[Int(document.documentID)!] = document.data()
                     }
                     self.LowerThan.sort(by: <)
-                    print(self.LowerThan)
                 }
             }
         }
     }
+
+    
+    func AnswerClassifier(_ answer:Int){
+        print(answer)
+        for item in LowerThan{
+            if answer <= item{
+                AnswerProcessing(answer, item)
+                break
+            }
+        }
+    }
+    
+    func AnswerProcessing(_ answer:Int, _ cls:Int){
+        let temp = self.parent as! QuestionGenerator
+        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"11choices","answer":String(answer)])
+        let clsDic = self.ClassDic[cls]
+        if let Ask = clsDic!["Ask"]{
+            let Ask = Ask as! Bool
+            if Ask == true{
+                self.Asking_alert(clsDic!["Asking"] as! String, clsDic!)
+            }else{
+                let temp = self.parent as! QuestionGenerator
+                self.view.removeFromSuperview()
+                temp.next(clsDic!["next"] as! String)
+            }
+        }
+    }
+    
+    func Asking_alert(_ Asking:String, _ dic: [String:Any]){
+        let alert = UIAlertController(title: "Asking", message: Asking, preferredStyle: .alert)
+        let True_action = UIAlertAction(title: "Accept", style: .default){(action)in
+            let temp = self.parent as! QuestionGenerator
+            self.view.removeFromSuperview()
+            temp.Ask_processing(dic["True_next"] as! String, dic["False_next"]as! String)
+        }
+        let False_action = UIAlertAction(title: "Refuse", style: .default){(action)in
+            let temp = self.parent as! QuestionGenerator
+            self.view.removeFromSuperview()
+            temp.next(dic["False_next"] as! String)
+        }
+        alert.addAction(True_action)
+        alert.addAction(False_action)
+        present(alert,animated: true, completion: nil)
+    }
+    
+    @IBAction func Back(_ sender: UIButton) {
+    }
+    
     
     @IBAction func One(_ sender: UIButton) {
         AnswerClassifier(1)
@@ -90,23 +140,6 @@ class TenChoicesViewController: UIViewController {
     
     @IBAction func Ten(_ sender: UIButton) {
         AnswerClassifier(10)
-    }
-    
-    func AnswerClassifier(_ answer:Int){
-        print(answer)
-        for item in LowerThan{
-            if answer <= item{
-                print(item)
-                break
-            }
-        }
-    }
-    
-    
-    
-    
-    
-    @IBAction func Back(_ sender: UIButton) {
     }
     
 }

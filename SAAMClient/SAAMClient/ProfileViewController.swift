@@ -3,6 +3,7 @@
 //  SAAMClient
 //
 //  Created by AdamLi on 2020/2/21.
+//  Modified by Xiaoyi Wang on 2020/2/27
 //  Copyright © 2020 SAAM. All rights reserved.
 //
 
@@ -39,10 +40,10 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
                 print("User Signed In")
                 self.userDefault.set(true, forKey: "usersignedin")
                 self.userDefault.synchronize()
+                //To the profile page
                 self.performSegue(withIdentifier: "profileView", sender: self)
                 print("signed in performed")
             }else{
-                print(error)
                 print(error?.localizedDescription)
                 print("sign in failed")
             }
@@ -57,7 +58,7 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
         guard let password = passwordTextField.text else {return}
         guard let repeatpass = repeatPasswordTextField.text else {return}
             
-               
+        //input varification
         if email == ""{
             self.errorLabel.text = "Please provide an email"
         }else if password == ""{
@@ -77,6 +78,7 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
                     print("user created")
                     //log in first
                     self.signInUser(email: email, password: password)
+                    //Save the user's name
                     self.saveProfile(username: username) { success in
                         if success {
                             self.performSegue(withIdentifier: "profileView", sender: self)
@@ -93,15 +95,17 @@ class ProfileViewController:  UIViewController, UITextFieldDelegate{
     
     @IBAction func BackToLoginButtonTapped(_ sender: Any) {
         print("back to log in")
+        //Go back to the login page
         self.dismiss(animated: true, completion: nil)
     }
     
-    
+    //Update the username
     func saveProfile(username:String, completion: @escaping ((_ success:Bool)->())) {
         
         //Change User's auth info
         if let u = Auth.auth().currentUser{
             let changeNameRequist = u.createProfileChangeRequest()
+            //save username to auth displayname
             changeNameRequist.displayName = username
             changeNameRequist.commitChanges{(error) in
                 if error != nil{

@@ -3,6 +3,7 @@
 //  SAAMClient
 //
 //  Created by AdamLi on 2020/2/21.
+//  Modified by Xiaoyi Wang on 2020/2/27
 //  Copyright © 2020 SAAM. All rights reserved.
 //
 
@@ -42,6 +43,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 print("User Signed In")
                 self.userDefault.set(true, forKey: "usersignedin")
                 self.userDefault.synchronize()
+                //segue to the profile page
                 self.performSegue(withIdentifier: "LogIn", sender: self)
             }
             else{
@@ -54,6 +56,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signinButtonTapped(_ sender: Any) {
         print("Sign in button tapped.");
+        //signInUser function
         signInUser(email: usernameText.text!, password: userPasswordText.text!){ success in
             if success {
             }
@@ -63,6 +66,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func signupButtonTapped(_ sender: Any) {
         print("Sign up button tapped.");
+        //to sign up page
         performSegue(withIdentifier: "signinToProfile", sender: self)
     }
     

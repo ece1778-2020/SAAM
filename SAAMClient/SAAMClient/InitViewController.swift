@@ -15,7 +15,6 @@ class InitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
     }
     
 
@@ -31,6 +30,7 @@ class InitViewController: UIViewController {
             //go to the log in page
             performSegue(withIdentifier: "InitToLogin", sender:self )
         }else{
+            //go to the profile page of the current user
             self.performSegue(withIdentifier: "InitToProfile", sender:self )
         }
     }
