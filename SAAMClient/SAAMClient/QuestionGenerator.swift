@@ -55,12 +55,12 @@ class QuestionGenerator: UIViewController {
     func Type_selector(Questionid:String, Type: String){
         //put question into different user interface
         if Type == "11choices"{
-            let TenChoices = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TenChoices") as! TenChoicesViewController
-            self.addChild(TenChoices)
-            TenChoices.view.frame = self.view.frame
-            self.view.addSubview(TenChoices.view)
-            TenChoices.didMove(toParent: self )
-            TenChoices.Questionid = Questionid
+            let ElevenChoices = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ElevenChoices") as! ElevenChoicesViewController
+            self.addChild(ElevenChoices)
+            ElevenChoices.view.frame = self.view.frame
+            self.view.addSubview(ElevenChoices.view)
+            ElevenChoices.didMove(toParent: self )
+            ElevenChoices.Questionid = Questionid
         }
         else if Type == "Input"{
             let inputQ = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InputQuestion") as! InputQuestionViewController

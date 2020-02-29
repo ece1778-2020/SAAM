@@ -14,6 +14,7 @@
 		C640AED224022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
 		C640AED324022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
 		C640AED424022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
+		C8664600240B1164006C6BE3 /* ElevenChoicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C86645FF240B1164006C6BE3 /* ElevenChoicesViewController.swift */; };
 		C88BE39624072A8B007E554E /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88BE39524072A8B007E554E /* InitViewController.swift */; };
 		C88BE398240759A1007E554E /* QuestionGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88BE397240759A1007E554E /* QuestionGenerator.swift */; };
 		C88BE39A24076295007E554E /* MTQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88BE39924076295007E554E /* MTQuestionViewController.swift */; };
@@ -56,6 +57,7 @@
 		C640AECD2400784D005BAEFE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C640AECF24021CDB005BAEFE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		C640AED124022FBC005BAEFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C86645FF240B1164006C6BE3 /* ElevenChoicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElevenChoicesViewController.swift; sourceTree = "<group>"; };
 		C88BE39524072A8B007E554E /* InitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
 		C88BE397240759A1007E554E /* QuestionGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionGenerator.swift; sourceTree = "<group>"; };
 		C88BE39924076295007E554E /* MTQuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MTQuestionViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				C88BE39D240777CF007E554E /* TenChoicesViewController.swift */,
 				C88BE3A324088C9E007E554E /* MTSelectionViewController.swift */,
 				C88BE3A72409F811007E554E /* ResultViewController.swift */,
+				C86645FF240B1164006C6BE3 /* ElevenChoicesViewController.swift */,
 			);
 			path = SAAMClient;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				C88BE3A224085A70007E554E /* InputQuestionViewController.swift in Sources */,
 				C640AECC24007833005BAEFE /* LoginViewController.swift in Sources */,
 				C88BE398240759A1007E554E /* QuestionGenerator.swift in Sources */,
+				C8664600240B1164006C6BE3 /* ElevenChoicesViewController.swift in Sources */,
 				C88BE39624072A8B007E554E /* InitViewController.swift in Sources */,
 				C88BE39A24076295007E554E /* MTQuestionViewController.swift in Sources */,
 				C640AED024021CDB005BAEFE /* Profile.swift in Sources */,

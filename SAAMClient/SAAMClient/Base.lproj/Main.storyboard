@@ -6,6 +6,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="TimesNewRoman.ttf">
+            <string>.SFUI-Regular</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Init View Controller-->
         <scene sceneID="oTJ-dh-VXN">
@@ -64,6 +69,106 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IQO-cK-XRJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-743" y="898"/>
+        </scene>
+        <!--Eleven Choices View Controller-->
+        <scene sceneID="14r-DP-VCM">
+            <objects>
+                <viewController storyboardIdentifier="ElevenChoices" id="U7b-aN-hDJ" customClass="ElevenChoicesViewController" customModule="SAAMClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MTQ-m6-5ba">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5o-Vy-EBQ">
+                                <rect key="frame" x="40" y="40" width="240" height="20.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="JW1-xB-dWf">
+                                <rect key="frame" x="39" y="80.5" width="243" height="31"/>
+                                <connections>
+                                    <action selector="ValueChanged:" destination="U7b-aN-hDJ" eventType="valueChanged" id="aAe-MF-QIE"/>
+                                </connections>
+                            </slider>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" adjustsFontForContentSizeCategory="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82f-Iv-YfD">
+                                <rect key="frame" x="40" y="150.5" width="240" height="307.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feeling Good" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-NQ-gCX">
+                                <rect key="frame" x="20" y="110.5" width="102" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feeling Bad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yi9-JY-Af4">
+                                <rect key="frame" x="210" y="110.5" width="90" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oUc-6g-MkS">
+                                <rect key="frame" x="20" y="84.5" width="11" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjn-to-Td3">
+                                <rect key="frame" x="41" y="496" width="240" height="30"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="TLE-O0-N6W"/>
+                                </constraints>
+                                <state key="normal" title="Submit"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="submit:" destination="U7b-aN-hDJ" eventType="touchUpInside" id="JFS-KL-Zqs"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Muj-NQ-gCX" firstAttribute="top" secondItem="oUc-6g-MkS" secondAttribute="bottom" constant="5" id="1p1-MF-NPJ"/>
+                            <constraint firstItem="Yi9-JY-Af4" firstAttribute="top" secondItem="JW1-xB-dWf" secondAttribute="bottom" id="3Sb-jg-cjt"/>
+                            <constraint firstItem="kjn-to-Td3" firstAttribute="top" secondItem="82f-Iv-YfD" secondAttribute="bottom" constant="40" id="42y-2d-vY5"/>
+                            <constraint firstItem="Kgf-uT-Yv6" firstAttribute="trailing" secondItem="Yi9-JY-Af4" secondAttribute="trailing" constant="20" id="4Jl-Vp-Msn"/>
+                            <constraint firstItem="Muj-NQ-gCX" firstAttribute="top" secondItem="JW1-xB-dWf" secondAttribute="bottom" id="GqD-cy-xVn"/>
+                            <constraint firstItem="Kgf-uT-Yv6" firstAttribute="trailing" secondItem="JW1-xB-dWf" secondAttribute="trailing" constant="40" id="J88-52-PMF"/>
+                            <constraint firstItem="kjn-to-Td3" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="40" id="Jgf-hk-sz8"/>
+                            <constraint firstItem="JW1-xB-dWf" firstAttribute="top" secondItem="A5o-Vy-EBQ" secondAttribute="bottom" constant="20" id="NrL-8Z-c5J"/>
+                            <constraint firstItem="A5o-Vy-EBQ" firstAttribute="top" secondItem="Kgf-uT-Yv6" secondAttribute="top" constant="40" id="OEd-Sw-sDV"/>
+                            <constraint firstItem="Muj-NQ-gCX" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="20" id="UkT-Jr-1Pb"/>
+                            <constraint firstItem="JW1-xB-dWf" firstAttribute="leading" secondItem="oUc-6g-MkS" secondAttribute="trailing" constant="10" id="Vav-YR-Qdo"/>
+                            <constraint firstItem="Kgf-uT-Yv6" firstAttribute="trailing" secondItem="A5o-Vy-EBQ" secondAttribute="trailing" constant="40" id="XGP-47-BTO"/>
+                            <constraint firstItem="oUc-6g-MkS" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="20" id="aEU-aX-Sih"/>
+                            <constraint firstItem="A5o-Vy-EBQ" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="40" id="aLf-8v-p3F"/>
+                            <constraint firstItem="Kgf-uT-Yv6" firstAttribute="trailing" secondItem="82f-Iv-YfD" secondAttribute="trailing" constant="40" id="dkk-wL-089"/>
+                            <constraint firstItem="82f-Iv-YfD" firstAttribute="top" secondItem="JW1-xB-dWf" secondAttribute="bottom" constant="40" id="ian-l8-WBv"/>
+                            <constraint firstItem="82f-Iv-YfD" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="40" id="ibd-I3-eus"/>
+                            <constraint firstItem="Kgf-uT-Yv6" firstAttribute="bottom" secondItem="kjn-to-Td3" secondAttribute="bottom" constant="40" id="oId-dE-d4D"/>
+                            <constraint firstItem="Kgf-uT-Yv6" firstAttribute="trailing" secondItem="kjn-to-Td3" secondAttribute="trailing" constant="40" id="uyv-j2-Cn5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Kgf-uT-Yv6"/>
+                    </view>
+                    <connections>
+                        <outlet property="Left" destination="Muj-NQ-gCX" id="tf8-hQ-NOa"/>
+                        <outlet property="Question" destination="A5o-Vy-EBQ" id="Tzk-oc-lRh"/>
+                        <outlet property="Right" destination="Yi9-JY-Af4" id="Hty-vm-QQo"/>
+                        <outlet property="Slider" destination="JW1-xB-dWf" id="3Dz-Jh-Hct"/>
+                        <outlet property="SliderPosition" destination="oUc-6g-MkS" id="d3U-RV-dT7"/>
+                        <outlet property="TextView" destination="82f-Iv-YfD" id="lwv-8T-SWM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sha-Fp-BTA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-746.25" y="1583.4507042253522"/>
         </scene>
         <!--Ten Choices View Controller-->
         <scene sceneID="3rJ-hr-NoT">
@@ -847,7 +952,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Fy4-DA-j2B"/>
-        <segue reference="e9h-Qu-h6v"/>
+        <segue reference="lTH-cQ-abQ"/>
+        <segue reference="Dra-KX-zT0"/>
     </inferredMetricsTieBreakers>
 </document>
