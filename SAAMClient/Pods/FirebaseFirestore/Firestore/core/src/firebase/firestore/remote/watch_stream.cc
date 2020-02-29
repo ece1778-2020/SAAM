@@ -18,6 +18,7 @@
 
 #include "Firestore/core/src/firebase/firestore/remote/watch_stream.h"
 
+#include "Firestore/core/src/firebase/firestore/model/mutation.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/message.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/reader.h"
 #include "Firestore/core/src/firebase/firestore/remote/grpc_nanopb.h"
@@ -31,7 +32,7 @@ namespace remote {
 
 using auth::CredentialsProvider;
 using auth::Token;
-using local::QueryData;
+using local::TargetData;
 using model::TargetId;
 using nanopb::Message;
 using remote::ByteBufferReader;
@@ -51,7 +52,7 @@ WatchStream::WatchStream(
       callback_{NOT_NULL(callback)} {
 }
 
-void WatchStream::WatchQuery(const QueryData& query) {
+void WatchStream::WatchQuery(const TargetData& query) {
   EnsureOnQueue();
 
   auto request = watch_serializer_.EncodeWatchRequest(query);

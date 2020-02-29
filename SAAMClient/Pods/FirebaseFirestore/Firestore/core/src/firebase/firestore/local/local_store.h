@@ -21,27 +21,42 @@
 #include <unordered_map>
 #include <vector>
 
-#include "Firestore/core/src/firebase/firestore/auth/user.h"
-#include "Firestore/core/src/firebase/firestore/core/query.h"
 #include "Firestore/core/src/firebase/firestore/core/target_id_generator.h"
-#include "Firestore/core/src/firebase/firestore/local/local_documents_view.h"
-#include "Firestore/core/src/firebase/firestore/local/local_view_changes.h"
-#include "Firestore/core/src/firebase/firestore/local/local_write_result.h"
-#include "Firestore/core/src/firebase/firestore/local/lru_garbage_collector.h"
-#include "Firestore/core/src/firebase/firestore/local/persistence.h"
-#include "Firestore/core/src/firebase/firestore/local/query_engine.h"
-#include "Firestore/core/src/firebase/firestore/local/query_result.h"
 #include "Firestore/core/src/firebase/firestore/local/reference_set.h"
-#include "Firestore/core/src/firebase/firestore/model/document_key_set.h"
-#include "Firestore/core/src/firebase/firestore/model/document_map.h"
-#include "Firestore/core/src/firebase/firestore/model/mutation.h"
-#include "Firestore/core/src/firebase/firestore/model/mutation_batch_result.h"
-#include "Firestore/core/src/firebase/firestore/remote/remote_event.h"
+#include "Firestore/core/src/firebase/firestore/local/target_data.h"
+#include "Firestore/core/src/firebase/firestore/model/model_fwd.h"
 #include "absl/types/optional.h"
 
 namespace firebase {
 namespace firestore {
+
+namespace auth {
+class User;
+}  // namespace auth
+
+namespace core {
+class Query;
+}  // namespace core
+
+namespace remote {
+class RemoteEvent;
+class TargetChange;
+}  // namespace remote
+
 namespace local {
+
+class LocalDocumentsView;
+class LocalViewChanges;
+class LocalWriteResult;
+class LruGarbageCollector;
+class MutationQueue;
+class Persistence;
+class QueryEngine;
+class QueryResult;
+class RemoteDocumentCache;
+class TargetCache;
+
+struct LruResults;
 
 /**
  * Local storage in the Firestore client. Coordinates persistence components
@@ -89,6 +104,8 @@ class LocalStore {
              QueryEngine* query_engine,
              const auth::User& initial_user);
 
+  ~LocalStore();
+
   /** Performs any initial startup actions required by the local store. */
   void Start();
 
@@ -101,8 +118,7 @@ class LocalStore {
   model::MaybeDocumentMap HandleUserChange(const auth::User& user);
 
   /** Accepts locally generated Mutations and commits them to storage. */
-  local::LocalWriteResult WriteLocally(
-      std::vector<model::Mutation>&& mutations);
+  LocalWriteResult WriteLocally(std::vector<model::Mutation>&& mutations);
 
   /**
    * Returns the current value of a document with a given key, or `nullopt` if
@@ -177,7 +193,7 @@ class LocalStore {
    * Allocating an already allocated target will return the existing
    * `TargetData` for that target.
    */
-  local::QueryData AllocateTarget(core::Target target);
+  TargetData AllocateTarget(core::Target target);
 
   /**
    * Unpin all the documents associated with a target.
@@ -188,21 +204,20 @@ class LocalStore {
 
   /**
    * Runs the specified query against the local store and returns the results,
-   * potentially taking advantage of query data from previous executions (such
+   * potentially taking advantage of target data from previous executions (such
    * as the set of remote keys).
    *
    * @param use_previous_results Whether results from previous executions can be
    *     used to optimize this query execution.
    */
-  local::QueryResult ExecuteQuery(const core::Query& query,
-                                  bool use_previous_results);
+  QueryResult ExecuteQuery(const core::Query& query, bool use_previous_results);
 
   /**
    * Notify the local store of the changed views to locally pin / unpin
    * documents.
    */
   void NotifyLocalViewChanges(
-      const std::vector<local::LocalViewChanges>& view_changes);
+      const std::vector<LocalViewChanges>& view_changes);
 
   /**
    * Gets the mutation batch after the passed in batch_id in the mutation queue
@@ -221,35 +236,34 @@ class LocalStore {
    */
   model::BatchId GetHighestUnacknowledgedBatchId();
 
-  local::LruResults CollectGarbage(
-      local::LruGarbageCollector* garbage_collector);
+  LruResults CollectGarbage(LruGarbageCollector* garbage_collector);
 
  private:
-  friend class LocalStoreTest;  // for `GetQueryData()`
+  friend class LocalStoreTest;  // for `GetTargetData()`
 
   void StartMutationQueue();
   void ApplyBatchResult(const model::MutationBatchResult& batch_result);
 
   /**
-   * Returns true if the new_query_data should be persisted during an update of
-   * an active target. QueryData should always be persisted when a target is
+   * Returns true if the new_target_data should be persisted during an update of
+   * an active target. TargetData should always be persisted when a target is
    * being released and should not call this function.
    *
-   * While the target is active, QueryData updates can be omitted when nothing
+   * While the target is active, TargetData updates can be omitted when nothing
    * about the target has changed except metadata like the resume token or
    * snapshot version. Occasionally it's worth the extra write to prevent these
    * values from getting too stale after a crash, but this doesn't have to be
    * too frequent.
    */
-  bool ShouldPersistQueryData(const QueryData& new_query_data,
-                              const local::QueryData& old_query_data,
-                              const remote::TargetChange& change) const;
+  bool ShouldPersistTargetData(const TargetData& new_target_data,
+                               const TargetData& old_target_data,
+                               const remote::TargetChange& change) const;
 
   /**
-   * Returns the QueryData as seen by the LocalStore, including updates that may
-   * have not yet been persisted to the QueryCache.
+   * Returns the TargetData as seen by the LocalStore, including updates that
+   * may have not yet been persisted to the TargetCache.
    */
-  absl::optional<QueryData> GetQueryData(const core::Target& query);
+  absl::optional<TargetData> GetTargetData(const core::Target& query);
 
   /** Manages our in-memory or durable persistence. Owned by FirestoreClient. */
   Persistence* persistence_ = nullptr;
@@ -267,7 +281,7 @@ class LocalStore {
   RemoteDocumentCache* remote_document_cache_ = nullptr;
 
   /** Maps a query to the data about that query. */
-  QueryCache* query_cache_ = nullptr;
+  TargetCache* target_cache_ = nullptr;
 
   /**
    * Performs queries over the localDocuments (and potentially maintains
@@ -285,7 +299,7 @@ class LocalStore {
   ReferenceSet local_view_references_;
 
   /** Maps target ids to data about their queries. */
-  std::unordered_map<model::TargetId, QueryData> query_data_by_target_;
+  std::unordered_map<model::TargetId, TargetData> target_data_by_target_;
 
   /** Maps a target to its targetID. */
   std::unordered_map<core::Target, model::TargetId> target_id_by_target_;

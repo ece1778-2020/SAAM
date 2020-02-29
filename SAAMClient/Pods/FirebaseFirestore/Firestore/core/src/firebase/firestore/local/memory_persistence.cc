@@ -23,10 +23,11 @@
 #include "Firestore/core/src/firebase/firestore/local/memory_index_manager.h"
 #include "Firestore/core/src/firebase/firestore/local/memory_lru_reference_delegate.h"
 #include "Firestore/core/src/firebase/firestore/local/memory_mutation_queue.h"
-#include "Firestore/core/src/firebase/firestore/local/memory_query_cache.h"
 #include "Firestore/core/src/firebase/firestore/local/memory_remote_document_cache.h"
+#include "Firestore/core/src/firebase/firestore/local/memory_target_cache.h"
 #include "Firestore/core/src/firebase/firestore/local/reference_delegate.h"
 #include "Firestore/core/src/firebase/firestore/local/sizer.h"
+#include "Firestore/core/src/firebase/firestore/local/target_data.h"
 #include "absl/memory/memory.h"
 
 namespace firebase {
@@ -55,7 +56,7 @@ std::unique_ptr<MemoryPersistence> MemoryPersistence::WithLruGarbageCollector(
 }
 
 MemoryPersistence::MemoryPersistence()
-    : query_cache_(this), remote_document_cache_(this), started_(true) {
+    : target_cache_(this), remote_document_cache_(this), started_(true) {
 }
 
 MemoryPersistence::~MemoryPersistence() = default;
@@ -89,8 +90,8 @@ MemoryMutationQueue* MemoryPersistence::GetMutationQueueForUser(
   }
 }
 
-MemoryQueryCache* MemoryPersistence::query_cache() {
-  return &query_cache_;
+MemoryTargetCache* MemoryPersistence::target_cache() {
+  return &target_cache_;
 }
 
 MemoryRemoteDocumentCache* MemoryPersistence::remote_document_cache() {

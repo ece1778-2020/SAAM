@@ -23,14 +23,19 @@
 #include <utility>
 
 #include "Firestore/Protos/nanopb/firestore/local/maybe_document.nanopb.h"
+#include "Firestore/Protos/nanopb/firestore/local/mutation.nanopb.h"
 #include "Firestore/Protos/nanopb/firestore/local/target.nanopb.h"
 #include "Firestore/Protos/nanopb/google/firestore/v1/document.nanopb.h"
 #include "Firestore/core/src/firebase/firestore/core/query.h"
+#include "Firestore/core/src/firebase/firestore/local/target_data.h"
+#include "Firestore/core/src/firebase/firestore/model/document.h"
 #include "Firestore/core/src/firebase/firestore/model/field_value.h"
+#include "Firestore/core/src/firebase/firestore/model/mutation_batch.h"
 #include "Firestore/core/src/firebase/firestore/model/no_document.h"
 #include "Firestore/core/src/firebase/firestore/model/snapshot_version.h"
 #include "Firestore/core/src/firebase/firestore/model/unknown_document.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/byte_string.h"
+#include "Firestore/core/src/firebase/firestore/nanopb/message.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/nanopb_util.h"
 #include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
 #include "Firestore/core/src/firebase/firestore/util/string_format.h"
@@ -214,26 +219,26 @@ UnknownDocument LocalSerializer::DecodeUnknownDocument(
                          version);
 }
 
-Message<firestore_client_Target> LocalSerializer::EncodeQueryData(
-    const QueryData& query_data) const {
-  HARD_ASSERT(query_data.purpose() == QueryPurpose::Listen,
+Message<firestore_client_Target> LocalSerializer::EncodeTargetData(
+    const TargetData& target_data) const {
+  HARD_ASSERT(target_data.purpose() == QueryPurpose::Listen,
               "Only queries with purpose %s may be stored, got %s",
-              QueryPurpose::Listen, query_data.purpose());
+              QueryPurpose::Listen, target_data.purpose());
 
   Message<firestore_client_Target> result;
 
-  result->target_id = query_data.target_id();
-  result->last_listen_sequence_number = query_data.sequence_number();
+  result->target_id = target_data.target_id();
+  result->last_listen_sequence_number = target_data.sequence_number();
   result->snapshot_version = rpc_serializer_.EncodeTimestamp(
-      query_data.snapshot_version().timestamp());
+      target_data.snapshot_version().timestamp());
   result->last_limbo_free_snapshot_version = rpc_serializer_.EncodeTimestamp(
-      query_data.last_limbo_free_snapshot_version().timestamp());
+      target_data.last_limbo_free_snapshot_version().timestamp());
 
   // Force a copy because pb_release would otherwise double-free.
   result->resume_token =
-      nanopb::CopyBytesArray(query_data.resume_token().get());
+      nanopb::CopyBytesArray(target_data.resume_token().get());
 
-  const Target& target = query_data.target();
+  const Target& target = target_data.target();
   if (target.IsDocumentQuery()) {
     result->which_target_type = firestore_client_Target_documents_tag;
     result->documents = rpc_serializer_.EncodeDocumentsTarget(target);
@@ -245,9 +250,9 @@ Message<firestore_client_Target> LocalSerializer::EncodeQueryData(
   return result;
 }
 
-QueryData LocalSerializer::DecodeQueryData(
+TargetData LocalSerializer::DecodeTargetData(
     Reader* reader, const firestore_client_Target& proto) const {
-  if (!reader->status().ok()) return QueryData::Invalid();
+  if (!reader->status().ok()) return TargetData();
 
   model::TargetId target_id = proto.target_id;
   model::ListenSequenceNumber sequence_number =
@@ -275,10 +280,10 @@ QueryData LocalSerializer::DecodeQueryData(
           StringFormat("Unknown target_type: %s", proto.which_target_type));
   }
 
-  if (!reader->status().ok()) return QueryData::Invalid();
-  return QueryData(std::move(target), target_id, sequence_number,
-                   QueryPurpose::Listen, version,
-                   last_limbo_free_snapshot_version, std::move(resume_token));
+  if (!reader->status().ok()) return TargetData();
+  return TargetData(std::move(target), target_id, sequence_number,
+                    QueryPurpose::Listen, version,
+                    last_limbo_free_snapshot_version, std::move(resume_token));
 }
 
 Message<firestore_client_WriteBatch> LocalSerializer::EncodeMutationBatch(

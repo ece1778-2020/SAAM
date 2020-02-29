@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		41F76A3A1037EF166572FD92 /* Pods_SAAMClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 301ECE9D5BBAF7B7EC821321 /* Pods_SAAMClient.framework */; };
+		45F6453801A8AD6989ED36F1 /* Pods_SAAMClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F80CB7AB3A853F34FED9C3A /* Pods_SAAMClient.framework */; };
 		C640AECC24007833005BAEFE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C640AECB24007833005BAEFE /* LoginViewController.swift */; };
 		C640AECE2400784D005BAEFE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C640AECD2400784D005BAEFE /* ProfileViewController.swift */; };
 		C640AED024021CDB005BAEFE /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = C640AECF24021CDB005BAEFE /* Profile.swift */; };
@@ -49,9 +49,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		301ECE9D5BBAF7B7EC821321 /* Pods_SAAMClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SAAMClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		31872FC2AD334F3C93901B8F /* Pods-SAAMClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SAAMClient.debug.xcconfig"; path = "Target Support Files/Pods-SAAMClient/Pods-SAAMClient.debug.xcconfig"; sourceTree = "<group>"; };
 		69BF3C7F581D69826D407E60 /* Pods-SAAMClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SAAMClient.release.xcconfig"; path = "Target Support Files/Pods-SAAMClient/Pods-SAAMClient.release.xcconfig"; sourceTree = "<group>"; };
+		9F80CB7AB3A853F34FED9C3A /* Pods_SAAMClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SAAMClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C640AECB24007833005BAEFE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C640AECD2400784D005BAEFE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C640AECF24021CDB005BAEFE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
@@ -84,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41F76A3A1037EF166572FD92 /* Pods_SAAMClient.framework in Frameworks */,
+				45F6453801A8AD6989ED36F1 /* Pods_SAAMClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,7 +117,7 @@
 		377CD38603ACD15919259EB5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				301ECE9D5BBAF7B7EC821321 /* Pods_SAAMClient.framework */,
+				9F80CB7AB3A853F34FED9C3A /* Pods_SAAMClient.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -198,7 +198,7 @@
 				C8B744E02400611A00190923 /* Sources */,
 				C8B744E12400611A00190923 /* Frameworks */,
 				C8B744E22400611A00190923 /* Resources */,
-				3A88D9DEE6432AD6A56CF5B2 /* [CP] Embed Pods Frameworks */,
+				76A5601FC9F82E5B2EA0F0D1 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -341,7 +341,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3A88D9DEE6432AD6A56CF5B2 /* [CP] Embed Pods Frameworks */ = {
+		76A5601FC9F82E5B2EA0F0D1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (

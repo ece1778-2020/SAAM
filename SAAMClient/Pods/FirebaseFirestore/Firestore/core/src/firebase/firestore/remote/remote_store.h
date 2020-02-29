@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Google
+ * Copyright 2019 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,9 @@
 #include <vector>
 
 #include "Firestore/core/src/firebase/firestore/core/transaction.h"
-#include "Firestore/core/src/firebase/firestore/local/local_store.h"
-#include "Firestore/core/src/firebase/firestore/model/document_key_set.h"
+#include "Firestore/core/src/firebase/firestore/local/target_data.h"
+#include "Firestore/core/src/firebase/firestore/model/model_fwd.h"
 #include "Firestore/core/src/firebase/firestore/model/mutation_batch.h"
-#include "Firestore/core/src/firebase/firestore/model/mutation_batch_result.h"
-#include "Firestore/core/src/firebase/firestore/model/snapshot_version.h"
 #include "Firestore/core/src/firebase/firestore/model/types.h"
 #include "Firestore/core/src/firebase/firestore/remote/datastore.h"
 #include "Firestore/core/src/firebase/firestore/remote/online_state_tracker.h"
@@ -39,6 +37,11 @@
 
 namespace firebase {
 namespace firestore {
+
+namespace local {
+class LocalStore;
+}  // namespace local
+
 namespace remote {
 
 /**
@@ -148,12 +151,12 @@ class RemoteStore : public TargetMetadataProvider,
   void HandleCredentialChange();
 
   /**
-   * Listens to the target identified by the given `QueryData`.
+   * Listens to the target identified by the given `TargetData`.
    *
-   * It is a no-op if the target of the given query data is already being
+   * It is a no-op if the target of the given target data is already being
    * listened to.
    */
-  void Listen(const local::QueryData& query_data);
+  void Listen(const local::TargetData& target_data);
 
   /**
    * Stops listening to the target with the given target ID.
@@ -185,7 +188,7 @@ class RemoteStore : public TargetMetadataProvider,
 
   model::DocumentKeySet GetRemoteKeysForTarget(
       model::TargetId target_id) const override;
-  absl::optional<local::QueryData> GetQueryDataForTarget(
+  absl::optional<local::TargetData> GetTargetDataForTarget(
       model::TargetId target_id) const override;
 
   void OnWatchStreamOpen() override;
@@ -204,7 +207,7 @@ class RemoteStore : public TargetMetadataProvider,
  private:
   void DisableNetworkInternal();
 
-  void SendWatchRequest(const local::QueryData& query_data);
+  void SendWatchRequest(const local::TargetData& target_data);
   void SendUnwatchRequest(model::TargetId target_id);
 
   /**
@@ -263,7 +266,7 @@ class RemoteStore : public TargetMetadataProvider,
    * to the server. The targets removed with unlistens are removed eagerly
    * without waiting for confirmation from the listen stream.
    */
-  std::unordered_map<model::TargetId, local::QueryData> listen_targets_;
+  std::unordered_map<model::TargetId, local::TargetData> listen_targets_;
 
   OnlineStateTracker online_state_tracker_;
 

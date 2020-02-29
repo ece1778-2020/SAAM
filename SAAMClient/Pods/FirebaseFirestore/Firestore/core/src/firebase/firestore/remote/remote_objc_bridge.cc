@@ -18,8 +18,10 @@
 
 #include <map>
 
+#include "Firestore/core/src/firebase/firestore/core/database_info.h"
 #include "Firestore/core/src/firebase/firestore/model/document_key.h"
 #include "Firestore/core/src/firebase/firestore/model/maybe_document.h"
+#include "Firestore/core/src/firebase/firestore/model/mutation.h"
 #include "Firestore/core/src/firebase/firestore/model/snapshot_version.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/byte_string.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/nanopb_util.h"
@@ -37,7 +39,7 @@ namespace firestore {
 namespace remote {
 
 using core::DatabaseInfo;
-using local::QueryData;
+using local::TargetData;
 using model::DocumentKey;
 using model::MaybeDocument;
 using model::Mutation;
@@ -63,7 +65,7 @@ WatchStreamSerializer::WatchStreamSerializer(Serializer serializer)
 }
 
 Message<google_firestore_v1_ListenRequest>
-WatchStreamSerializer::EncodeWatchRequest(const QueryData& query) const {
+WatchStreamSerializer::EncodeWatchRequest(const TargetData& query) const {
   Message<google_firestore_v1_ListenRequest> result;
 
   result->database = serializer_.EncodeDatabaseName();

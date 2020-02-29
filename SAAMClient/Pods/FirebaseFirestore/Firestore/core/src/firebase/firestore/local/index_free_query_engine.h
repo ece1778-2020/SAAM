@@ -19,24 +19,20 @@
 
 #include "Firestore/core/src/firebase/firestore/local/query_engine.h"
 
-#include "Firestore/core/src/firebase/firestore/core/query.h"
-#include "Firestore/core/src/firebase/firestore/model/document_key_set.h"
-#include "Firestore/core/src/firebase/firestore/model/document_map.h"
+#include "Firestore/core/src/firebase/firestore/model/model_fwd.h"
 
 namespace firebase {
 namespace firestore {
 
-namespace model {
-
-class DocumentSet;
-
-}  // namespace model
+namespace core {
+enum class LimitType;
+}  // namespace core
 
 namespace local {
 
 /**
  * A query engine that takes advantage of the target document mapping in the
- * QueryCache. The IndexFreeQueryEngine optimizes query execution by only
+ * TargetCache. The IndexFreeQueryEngine optimizes query execution by only
  * reading the documents that previously matched a query plus any documents that
  * were edited after the query was last listened to.
  *

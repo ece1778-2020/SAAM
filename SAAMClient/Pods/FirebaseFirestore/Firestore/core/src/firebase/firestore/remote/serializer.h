@@ -27,27 +27,15 @@
 #include "Firestore/Protos/nanopb/google/firestore/v1/document.nanopb.h"
 #include "Firestore/Protos/nanopb/google/firestore/v1/firestore.nanopb.h"
 #include "Firestore/Protos/nanopb/google/type/latlng.nanopb.h"
-#include "Firestore/core/src/firebase/firestore/core/bound.h"
-#include "Firestore/core/src/firebase/firestore/core/field_filter.h"
+#include "Firestore/core/src/firebase/firestore/core/core_fwd.h"
 #include "Firestore/core/src/firebase/firestore/core/filter.h"
-#include "Firestore/core/src/firebase/firestore/core/order_by.h"
-#include "Firestore/core/src/firebase/firestore/core/target.h"
-#include "Firestore/core/src/firebase/firestore/local/query_data.h"
 #include "Firestore/core/src/firebase/firestore/model/database_id.h"
-#include "Firestore/core/src/firebase/firestore/model/document.h"
-#include "Firestore/core/src/firebase/firestore/model/document_key.h"
-#include "Firestore/core/src/firebase/firestore/model/field_mask.h"
-#include "Firestore/core/src/firebase/firestore/model/field_transform.h"
 #include "Firestore/core/src/firebase/firestore/model/field_value.h"
-#include "Firestore/core/src/firebase/firestore/model/maybe_document.h"
-#include "Firestore/core/src/firebase/firestore/model/mutation.h"
-#include "Firestore/core/src/firebase/firestore/model/no_document.h"
-#include "Firestore/core/src/firebase/firestore/model/snapshot_version.h"
+#include "Firestore/core/src/firebase/firestore/model/model_fwd.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/byte_string.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/reader.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/writer.h"
 #include "Firestore/core/src/firebase/firestore/remote/watch_change.h"
-#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
 #include "Firestore/core/src/firebase/firestore/util/status_fwd.h"
 #include "absl/base/attributes.h"
 #include "absl/strings/string_view.h"
@@ -57,7 +45,10 @@ namespace firestore {
 
 namespace local {
 class LocalSerializer;
-}
+class TargetData;
+
+enum class QueryPurpose;
+}  // namespace local
 
 namespace remote {
 
@@ -195,7 +186,7 @@ class Serializer {
       const model::SnapshotVersion& commit_version) const;
 
   std::vector<google_firestore_v1_ListenRequest_LabelsEntry>
-  EncodeListenRequestLabels(const local::QueryData& query_data) const;
+  EncodeListenRequestLabels(const local::TargetData& target_data) const;
 
   static pb_bytes_array_t* EncodeFieldPath(const model::FieldPath& field_path);
   static model::FieldPath DecodeFieldPath(const pb_bytes_array_t* field_path);
@@ -225,7 +216,7 @@ class Serializer {
       const model::ObjectValue& object_value) const;
 
   google_firestore_v1_Target EncodeTarget(
-      const local::QueryData& query_data) const;
+      const local::TargetData& target_data) const;
   google_firestore_v1_Target_DocumentsTarget EncodeDocumentsTarget(
       const core::Target& target) const;
   core::Target DecodeDocumentsTarget(

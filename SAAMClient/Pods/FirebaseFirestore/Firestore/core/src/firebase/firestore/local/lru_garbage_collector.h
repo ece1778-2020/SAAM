@@ -19,9 +19,9 @@
 
 #include <unordered_map>
 
-#include "Firestore/core/src/firebase/firestore/local/query_cache.h"
-#include "Firestore/core/src/firebase/firestore/local/query_data.h"
 #include "Firestore/core/src/firebase/firestore/local/reference_delegate.h"
+#include "Firestore/core/src/firebase/firestore/local/target_cache.h"
+#include "Firestore/core/src/firebase/firestore/local/target_data.h"
 #include "Firestore/core/src/firebase/firestore/model/types.h"
 
 namespace firebase {
@@ -29,6 +29,7 @@ namespace firestore {
 namespace local {
 
 class LruGarbageCollector;
+class TargetData;
 
 ABSL_CONST_INIT extern const model::ListenSequenceNumber
     kListenSequenceNumberInvalid;
@@ -56,7 +57,7 @@ struct LruResults {
   int documents_removed;
 };
 
-using LiveQueryMap = std::unordered_map<model::TargetId, QueryData>;
+using LiveQueryMap = std::unordered_map<model::TargetId, TargetData>;
 
 /**
  * Persistence layers intending to use LRU Garbage collection should implement
@@ -77,7 +78,7 @@ class LruDelegate : public ReferenceDelegate {
 
   /**
    * Enumerates all the targets that the delegate is aware of. This is typically
-   * all of the targets in an QueryCache.
+   * all of the targets in an TargetCache.
    */
   virtual void EnumerateTargets(const TargetCallback& callback) = 0;
 

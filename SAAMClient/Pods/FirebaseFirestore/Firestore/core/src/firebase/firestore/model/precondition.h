@@ -20,18 +20,14 @@
 #include <string>
 #include <utility>
 
-#if defined(__OBJC__)
-#include "Firestore/core/include/firebase/firestore/timestamp.h"
-#endif  // defined(__OBJC__)
-
-#include "Firestore/core/src/firebase/firestore/model/maybe_document.h"
 #include "Firestore/core/src/firebase/firestore/model/snapshot_version.h"
-#include "Firestore/core/src/firebase/firestore/util/hard_assert.h"
 #include "absl/types/optional.h"
 
 namespace firebase {
 namespace firestore {
 namespace model {
+
+class MaybeDocument;
 
 /**
  * Encodes a precondition for a mutation. This follows the model that the

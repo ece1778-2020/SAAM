@@ -23,8 +23,7 @@
 #include <vector>
 
 #include "Firestore/Protos/nanopb/google/firestore/v1/firestore.nanopb.h"
-#include "Firestore/core/src/firebase/firestore/core/database_info.h"
-#include "Firestore/core/src/firebase/firestore/local/query_data.h"
+#include "Firestore/core/src/firebase/firestore/core/core_fwd.h"
 #include "Firestore/core/src/firebase/firestore/model/types.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/byte_string.h"
 #include "Firestore/core/src/firebase/firestore/nanopb/message.h"
@@ -35,6 +34,10 @@
 
 namespace firebase {
 namespace firestore {
+
+namespace local {
+class TargetData;
+}  // namespace local
 
 namespace model {
 class DocumentKey;
@@ -67,7 +70,7 @@ class WatchStreamSerializer {
   explicit WatchStreamSerializer(Serializer serializer);
 
   nanopb::Message<google_firestore_v1_ListenRequest> EncodeWatchRequest(
-      const local::QueryData& query) const;
+      const local::TargetData& query) const;
   nanopb::Message<google_firestore_v1_ListenRequest> EncodeUnwatchRequest(
       model::TargetId target_id) const;
 
