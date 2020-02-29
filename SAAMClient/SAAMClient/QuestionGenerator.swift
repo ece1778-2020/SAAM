@@ -17,6 +17,7 @@ class QuestionGenerator: UIViewController {
     //define the uid and questionaire_name
     var uid:String?
     var questionaire_name:String?
+    var recommendations:[String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,10 +118,27 @@ class QuestionGenerator: UIViewController {
             if self.next_q.count != 0{
                 Ask_from_queue()
             }else{
-                performSegue(withIdentifier: "BackToProfile", sender: self)
+                let Result = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Result") as! ResultViewController
+                self.addChild(Result)
+                Result.view.frame = self.view.frame
+                self.view.addSubview(Result.view)
+                Result.didMove(toParent: self )
             }
         }else{
             self.QuestionProcess(Questionid: next)
+        }
+    }
+    
+    func BackToProfile(){
+        performSegue(withIdentifier: "BackToProfile", sender: self)
+    }
+    
+    func AddRecommendations(_ recommendation:String){
+        if self.recommendations.contains(recommendation){
+            print("recommendation ignored")
+        }else{
+            self.recommendations.append(recommendation)
+            print(self.recommendations)
         }
     }
     

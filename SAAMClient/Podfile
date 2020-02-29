@@ -3,8 +3,8 @@ platform :ios, '9.0'
 
 target 'SAAMClient' do
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
   pod 'AFNetworking', '0.9.1'
+  use_frameworks!
   # Pods for SAAMClient
   # add the Firebase pod for Google Analytics
   pod 'Firebase/Core'

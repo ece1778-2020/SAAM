@@ -99,6 +99,11 @@ class MTQuestionViewController: UIViewController {
         let temp = self.parent as! QuestionGenerator
         self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MC","answer":answer])
         let clsDic = self.ClassDic[answer]
+        if let recommendations = clsDic!["Recommendations"]{
+            for recommendation in recommendations as! [String]{
+                temp.AddRecommendations(recommendation)
+            }
+        }
         if let Ask = clsDic!["Ask"]{
             let Ask = Ask as! Bool
             if Ask == true{

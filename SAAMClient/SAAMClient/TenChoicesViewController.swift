@@ -65,6 +65,11 @@ class TenChoicesViewController: UIViewController {
         let temp = self.parent as! QuestionGenerator
         self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"11choices","answer":String(answer)])
         let clsDic = self.ClassDic[cls]
+        if let recommendations = clsDic!["Recommendations"]{
+            for recommendation in recommendations as! [String]{
+                temp.AddRecommendations(recommendation)
+            }
+        }
         if let Ask = clsDic!["Ask"]{
             let Ask = Ask as! Bool
             if Ask == true{

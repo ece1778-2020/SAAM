@@ -107,6 +107,12 @@ class MTSelectionViewController: UIViewController {
             print(self.answers_buffer)
             let answer = self.answers_buffer[0]
             let dic = self.ClassDic[answer]
+            let temp = self.parent as! QuestionGenerator
+            if let recommendations = dic!["Recommendations"]{
+                for recommendation in recommendations as! [String]{
+                    temp.AddRecommendations(recommendation)
+                }
+            }
             if (dic!["Ask"] as! Bool) == true{
                 self.answers_buffer.remove(at: 0)
                 Asking_alert(dic!["Asking"] as! String, dic!)
