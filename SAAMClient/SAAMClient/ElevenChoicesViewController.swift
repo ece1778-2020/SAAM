@@ -59,10 +59,12 @@ class ElevenChoicesViewController: UIViewController {
                         self.ClassDic[Int(document.documentID)!] = document.data()
                     }
                     self.LowerThan.sort(by: <)
+
+                self.AnswerProcessing(0,3)
+
                 }
             }
-        }
-    }
+        }    }
     
     @IBAction func ValueChanged(_ sender: UISlider) {
         let newValue = Int(sender.value)
