@@ -14,7 +14,8 @@ import FirebaseFirestore
 class MTSelectionViewController: UIViewController {
 
     @IBOutlet weak var body: UILabel!
-    @IBOutlet weak var StackView: UIStackView!
+    @IBOutlet weak var Stackview: UIStackView!
+    
     
     var buttons:[UIButton] = []
     var buttonmap: [String:String] = [:]
@@ -22,7 +23,7 @@ class MTSelectionViewController: UIViewController {
     var nexts:[String] = []
     var answers_buffer:[String] = []
     
-    var Questionid:String?
+    var Questionid:String? = "1_9"
     var globalnext:String?
     
     
@@ -68,9 +69,9 @@ class MTSelectionViewController: UIViewController {
                     }
                     
                     for button in self.buttons{
-                        self.StackView.addArrangedSubview(button)
-                        self.StackView.spacing = 20
-                        self.StackView.distribution = .fillEqually
+                        self.Stackview.addArrangedSubview(button)
+                        self.Stackview.spacing = 20
+                        self.Stackview.distribution = .fillEqually
                     }
                 
                 }
