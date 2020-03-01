@@ -24,7 +24,7 @@ class ElevenChoicesViewController: UIViewController {
     var Questionid:String?
     var LowerThan:[Int] = []
     var ClassDic:[Int:[String:Any]] = [:]
-    var Class:Int = 10
+    var Class:Int = 3
     
     override func viewDidLoad() {
         super.viewDidLoad()

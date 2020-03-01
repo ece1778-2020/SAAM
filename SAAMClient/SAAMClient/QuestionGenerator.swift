@@ -130,6 +130,9 @@ class QuestionGenerator: UIViewController {
     }
     
     func BackToProfile(){
+        let log = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Recommendations")
+        log.setData(["Recommendations":self.recommendations])
+        
         performSegue(withIdentifier: "BackToProfile", sender: self)
     }
     
