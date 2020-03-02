@@ -24,7 +24,7 @@ class ElevenChoicesViewController: UIViewController {
     var Questionid:String?
     var LowerThan:[Int] = []
     var ClassDic:[Int:[String:Any]] = [:]
-    var Class:Int = 3
+    var Class:Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +60,7 @@ class ElevenChoicesViewController: UIViewController {
                     }
                     self.LowerThan.sort(by: <)
 
-                self.AnswerProcessing(0,3)
+                self.AnswerClassifier(0)
 
                 }
             }
