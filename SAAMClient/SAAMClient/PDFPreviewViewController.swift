@@ -14,6 +14,14 @@ class PDFPreviewViewController: UIViewController {
     }
   }
     
+    @IBAction func Print(_ sender: UIButton) {
+
+
+        let vc = UIActivityViewController(activityItems: [documentData], applicationActivities: [])
+        present(vc, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func BackTapped(_ sender: Any) {
         performSegue(withIdentifier: "pdfBackProfile", sender: self)
     }

@@ -64,7 +64,8 @@ class ElevenChoicesViewController: UIViewController {
 
                 }
             }
-        }    }
+        }
+    }
     
     @IBAction func ValueChanged(_ sender: UISlider) {
         let newValue = Int(sender.value)
@@ -97,9 +98,20 @@ class ElevenChoicesViewController: UIViewController {
     
     @IBAction func submit(_ sender: Any) {
         let temp = self.parent as! QuestionGenerator
-    self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"11choices","answer":self.SliderPosition.text])
+    self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"11choices","answer":self.SliderPosition.text,"QuestionBody":self.Question.text])
+
         let cls = self.Class
         let clsDic = self.ClassDic[cls]
+        
+        var explainText = "Your choices was: \(self.SliderPosition.text!) \n"
+        if let explains = clsDic!["Explain"]{
+            for explain in explains as! [String]{
+                explainText += (explain + "\n")
+            }
+        }
+        
+        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":explainText], merge: true)
+        
         if let recommendations = clsDic!["Recommendations"]{
             for recommendation in recommendations as! [String]{
                 temp.AddRecommendations(recommendation)

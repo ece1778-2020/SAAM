@@ -55,7 +55,7 @@ class InputQuestionViewController: UIViewController {
         if let next = Next{
             //save answer to DB
             let temp = self.parent as! QuestionGenerator
-            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"Input","answer":self.Textview.text])
+            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"Input","answer":self.Textview.text, "AnswerBody":self.Textview.text, "QuestionBody":self.body.text])
             //Go to the next question by going back to the question generator
             self.view.removeFromSuperview()
             print(self.Textview.text)

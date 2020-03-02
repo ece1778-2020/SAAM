@@ -130,6 +130,22 @@ class QuestionGenerator: UIViewController {
     }
     
     func BackToProfile(){
+        
+        let ref = self.db.collection("logs").document(self.uid!)
+        ref.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    var Completed = data["Completed_Assessments"] as! [String]
+                        Completed.append(self.questionaire_name!)
+                        ref.setData(["Completed_Assessments":Completed])
+                }else{
+                    print("here")
+                    var Completed = [self.questionaire_name!]
+                    ref.setData(["Completed_Assessments":Completed])
+                }
+            }
+        }
+        
         let log = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Recommendations")
         log.setData(["Recommendations":self.recommendations])
         

@@ -19,6 +19,7 @@ class MTQuestionViewController: UIViewController {
     
     var buttons:[UIButton] = []
     var buttonmap: [String:String] = [:]
+    var mapbutton: [String:String] = [:]
     var ClassDic:[String:[String:Any]] = [:]
     
     var Questionid:String?
@@ -61,6 +62,7 @@ class MTQuestionViewController: UIViewController {
                         button.layer.masksToBounds = true
                         self.buttons.append(button)
                         self.buttonmap[data["body"] as! String] = document.documentID
+                        self.mapbutton[document.documentID] = data["body"] as! String
                         self.ClassDic[document.documentID] = data
                     }
                     
@@ -98,6 +100,7 @@ class MTQuestionViewController: UIViewController {
     func AnswerProcessing(_ answer:String){
         let temp = self.parent as! QuestionGenerator
         self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MC","answer":answer])
+        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer], "QuestionBody":self.body.text], merge: true)
         let clsDic = self.ClassDic[answer]
         if let recommendations = clsDic!["Recommendations"]{
             for recommendation in recommendations as! [String]{

@@ -21,6 +21,7 @@ class MTSelectionViewController: UIViewController {
     var buttonmap: [String:String] = [:]
     var ClassDic:[String:[String:Any]] = [:]
     var nexts:[String] = []
+    var not_next:[String] = []
     var answers_buffer:[String] = []
     
     var Questionid:String? = "1_9"
@@ -82,6 +83,8 @@ class MTSelectionViewController: UIViewController {
     func Asking_alert(_ Asking:String, _ dic: [String:Any]){
         if self.nexts.contains(dic["next"] as! String){
             self.AnswerProcessing()
+        }else if self.not_next.contains(dic["next"] as! String) {
+            self.AnswerProcessing()
         }else{
             let alert = UIAlertController(title: "Asking", message: Asking, preferredStyle: .alert)
             let True_action = UIAlertAction(title: "Accept", style: .default){(action)in
@@ -89,6 +92,7 @@ class MTSelectionViewController: UIViewController {
                 self.AnswerProcessing()
             }
             let False_action = UIAlertAction(title: "Refuse", style: .default){(action)in
+                self.not_next.append(dic["next"] as! String)
                 self.AnswerProcessing()
             }
             alert.addAction(True_action)
@@ -138,13 +142,20 @@ class MTSelectionViewController: UIViewController {
         var selected:[String] = []
         let temp = self.parent as! QuestionGenerator
         var index = 0
-        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MS"])
+        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MS", "QuestionBody":self.body.text])
+        var answerbody = "You selected:"
         for button in self.buttons{
             if(button.backgroundColor == UIColor.red){
                 selected.append(self.buttonmap[button.currentTitle!]!)
-                self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["\(index)":self.buttonmap[button.currentTitle!]!])
+                //self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["\(index)":self.buttonmap[button.currentTitle!]!], merge: true)
+                self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).collection("Answers").document(String(index)).setData(["ID":self.buttonmap[button.currentTitle!]!], merge: true)
+                    
+                    answerbody += ("\n"+button.currentTitle!)
+                
+                index += 1
             }
         }
+        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":answerbody], merge: true)
         self.answers_buffer = selected
         self.AnswerProcessing()
     }

@@ -18,16 +18,8 @@ class ResultViewController: UIViewController {
             self.TextView.text = self.TextView.text + "Recommendations: \n"
             var index = 1
             for recommendation in temp.recommendations{
-                if recommendation.prefix(3) == "IF "{
-                    var temp = recommendation
-                    temp.removeFirst()
-                    temp.removeFirst()
-                    temp.removeFirst()
-                    self.TextView.text = self.TextView.text + "\t" + temp + "\n"
-                }else{
-                    self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
-                    index += 1
-                }
+                self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
+                index += 1
             }
         }
         // Do any additional setup after loading the view.

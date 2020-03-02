@@ -7,7 +7,7 @@ class PDFCreator: NSObject {
   //let image: UIImage
   //let contactInfo: String
   
-  init(title: String) {
+    init(title: String, Body:String) {
     let now = Date()
     let formatter = DateFormatter()
     formatter.timeZone = TimeZone.current
@@ -15,7 +15,7 @@ class PDFCreator: NSObject {
     let dateString = formatter.string(from: now)
     //self.title = title + "SAAM Report \n" + "-  " + dateString
     self.title = "SAAM Report \n" + "  " + dateString
-    self.body = "The patient information is showed here!"
+    self.body = "The patient information is showed here!" + Body
   }
   
   func createFlyer() -> Data {
