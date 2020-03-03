@@ -32,7 +32,7 @@ class PDFCreator: NSObject {
     formatter.dateFormat = "yyyy-MM-dd"
     let dateString = formatter.string(from: now)
     //self.title = title + "SAAM Report \n" + "-  " + dateString
-    self.title = "\n\n\n\n\n SAAM Report \n" + "  " + dateString
+    self.title = "\n\n\n\n\n" + "SAAM Report" + "\n" + title
     self.body = "The patient information is showed here!" + Body
   }
   
@@ -77,7 +77,6 @@ class PDFCreator: NSObject {
                                    height: titleStringSize.height)
       // 5
       attributedTitle.draw(in: titleStringRect)
-        drawPageNumber(0)
       // 6
       return titleStringRect.origin.y + titleStringRect.size.height
     }

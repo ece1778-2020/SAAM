@@ -94,15 +94,25 @@ class SummaryViewController: UIViewController {
       if segue.identifier == "SummaryToPDF" {
         guard let vc = segue.destination as? PDFPreviewViewController else { return }
         
-        if let title =  FormatTime{
-            print("here")
-            if let body = TextView.text{
-                print("there")
-                let pdfCreator = PDFCreator(title: title, Body: body)
-                vc.documentData = pdfCreator.createFlyer()
-            }
+        let date = self.TimeStampFormatter(StrTimeStamp: self.TimeChoice!)
+        
+        let title = date
+        if let body = TextView.text{
+            print("there")
+            let pdfCreator = PDFCreator(title: title, Body: body)
+            vc.documentData = pdfCreator.createFlyer()
         }
         }
       }
+    
+    func TimeStampFormatter(StrTimeStamp:String) -> String{
+        let date = Date(timeIntervalSince1970: Double(StrTimeStamp) as! TimeInterval)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current //Set timezone that you want
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "yyyy-MM-dd" //Specify your format that you want
+        let strDate = dateFormatter.string(from: date)
+        return strDate
+    }
     
 }
