@@ -22,11 +22,8 @@ class QuestionGenerator: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //get questionaire name by setting it to a timestamp
-        let someDate = Date()
-        let timeInterval = someDate.timeIntervalSince1970
-        self.questionaire_name = String(Int(timeInterval))
         //Go to the first question
-        QuestionProcess(Questionid: "1")
+        //QuestionProcess(Questionid: "1")
         // Do any additional setup after loading the view.
     }
     
@@ -35,6 +32,9 @@ class QuestionGenerator: UIViewController {
         if let uid = Auth.auth().currentUser?.uid {
             self.uid = uid;
         }
+        
+        Set_Temp(self.questionaire_name!)
+        Ask_from_queue()
     }
     
     //init firestore and firebase storage
@@ -104,6 +104,7 @@ class QuestionGenerator: UIViewController {
     func Ask_from_queue(){
         //pop the first question of the queue
         let id = self.next_q[0]
+        Set_next_q(self.next_q)
         self.next_q.remove(at: 0)
         if id == "end"{
             self.next(id)
@@ -129,25 +130,39 @@ class QuestionGenerator: UIViewController {
         }
     }
     
+    func Set_Temp(_ ID: String){
+        let ref = self.db.collection("logs").document(self.uid!)
+        ref.setData(["Current": ID], merge: true)
+    }
+    
+    func Set_next_q(_ next_q: [String]){
+        let ref = self.db.collection("logs").document(self.uid!)
+        ref.setData(["next_q": next_q], merge: true)
+    }
+    
     func BackToProfile(){
-        
+        Set_Temp("None")
         let ref = self.db.collection("logs").document(self.uid!)
         ref.getDocument{(document,error)in
             if let document = document{
                 if let data = document.data(){
-                    var Completed = data["Completed_Assessments"] as! [String]
-                        Completed.append(self.questionaire_name!)
-                        ref.setData(["Completed_Assessments":Completed])
+                    if let Completed = data["Completed_Assessments"]{
+                        (Completed as AnyObject).append(self.questionaire_name!)
+                        ref.setData(["Completed_Assessments":Completed], merge: true)
+                        
+                    }else{
+                        let Completed = [self.questionaire_name!]
+                        ref.setData(["Completed_Assessments":Completed], merge: true)
+                    }
                 }else{
                     print("here")
-                    var Completed = [self.questionaire_name!]
-                    ref.setData(["Completed_Assessments":Completed])
+                    let Completed = [self.questionaire_name!]
+                    ref.setData(["Completed_Assessments":Completed], merge: true)
                 }
             }
         }
-        
         let log = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Recommendations")
-        log.setData(["Recommendations":self.recommendations])
+        log.setData(["Recommendations":self.recommendations], merge: true)
         
         performSegue(withIdentifier: "BackToProfile", sender: self)
     }
