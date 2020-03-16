@@ -18,6 +18,7 @@ class QuestionGenerator: UIViewController {
     var uid:String?
     var questionaire_name:String?
     var recommendations:[String] = []
+    var question_list:[String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +35,17 @@ class QuestionGenerator: UIViewController {
         }
         
         Set_Temp(self.questionaire_name!)
-        Ask_from_queue()
+        delete_Order()
     }
     
     //init firestore and firebase storage
     let db = Firestore.firestore()
     
     func QuestionProcess(Questionid:String){
+        if(Questionid != "end"){
+            self.add_Order(Questionid)
+            self.question_list.append(Questionid)
+        }
         //Classify questions
         let Question_ref = db.collection("Questions").document("ESSAS_Main").collection("Questions").document(Questionid)
         Question_ref.getDocument{(document,error)in
@@ -119,6 +124,11 @@ class QuestionGenerator: UIViewController {
             if self.next_q.count != 0{
                 Ask_from_queue()
             }else{
+                print("here")
+                self.next_q.insert(next, at: 0)
+                print(self.next_q)
+                Set_next_q(self.next_q)
+                self.next_q.remove(at: 0)
                 let Result = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Result") as! ResultViewController
                 self.addChild(Result)
                 Result.view.frame = self.view.frame
@@ -126,6 +136,11 @@ class QuestionGenerator: UIViewController {
                 Result.didMove(toParent: self )
             }
         }else{
+            print("here")
+            self.next_q.insert(next, at: 0)
+            print(self.next_q)
+            Set_next_q(self.next_q)
+            self.next_q.remove(at: 0)
             self.QuestionProcess(Questionid: next)
         }
     }
@@ -140,14 +155,13 @@ class QuestionGenerator: UIViewController {
         ref.setData(["next_q": next_q], merge: true)
     }
     
-    func BackToProfile(){
-        Set_Temp("None")
+    func add_completed(){
         let ref = self.db.collection("logs").document(self.uid!)
         ref.getDocument{(document,error)in
             if let document = document{
                 if let data = document.data(){
-                    if let Completed = data["Completed_Assessments"]{
-                        (Completed as AnyObject).append(self.questionaire_name!)
+                    if var Completed = data["Completed_Assessments"] as! [String]?{
+                        Completed.append(self.questionaire_name!)
                         ref.setData(["Completed_Assessments":Completed], merge: true)
                         
                     }else{
@@ -155,24 +169,80 @@ class QuestionGenerator: UIViewController {
                         ref.setData(["Completed_Assessments":Completed], merge: true)
                     }
                 }else{
-                    print("here")
                     let Completed = [self.questionaire_name!]
                     ref.setData(["Completed_Assessments":Completed], merge: true)
                 }
             }
         }
-        let log = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Recommendations")
-        log.setData(["Recommendations":self.recommendations], merge: true)
-        
+    }
+    
+    func add_Recommendations(_ Recommendation:String){
+        let ref = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Recommendations")
+        ref.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    if var Completed = data["Recommendations"] as! [String]?{
+                        Completed.append(Recommendation)
+                        ref.setData(["Recommendations":Completed], merge: true)
+                    }else{
+                        let Completed = [Recommendation]
+                        ref.setData(["Recommendations":Completed], merge: true)
+                    }
+                }else{
+                    let Completed = [Recommendation]
+                    ref.setData(["Recommendations":Completed], merge: true)
+                }
+            }
+        }
+    }
+    
+    func add_Order(_ order:String){
+        let ref = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Order")
+        ref.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    if var Order = data["Order"] as! [String]?{
+                        Order.append(order)
+                        ref.setData(["Order":Order], merge: true)
+                    }else{
+                        let Order = [order]
+                        ref.setData(["Order":Order], merge: true)
+                    }
+                }else{
+                    let Order = [order]
+                    ref.setData(["Order":Order], merge: true)
+                }
+            }
+        }
+    }
+    
+    func delete_Order(){
+        let ref = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Order")
+        ref.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    if var Order = data["Order"] as! [String]?{
+                        print(Order)
+                        Order.removeLast()
+                        ref.setData(["Order":Order], merge: true)
+                    }
+                }
+            }
+            self.Ask_from_queue()
+        }
+    }
+    
+    func BackToProfile(){
+        Set_Temp("None")
+        add_completed()
         performSegue(withIdentifier: "BackToProfile", sender: self)
     }
     
     func AddRecommendations(_ recommendation:String){
         if self.recommendations.contains(recommendation){
-            print("recommendation ignored")
         }else{
+            self.add_Recommendations(recommendation)
             self.recommendations.append(recommendation)
-            print(self.recommendations)
         }
     }
     

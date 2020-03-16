@@ -24,7 +24,7 @@ class MTSelectionViewController: UIViewController {
     var not_next:[String] = []
     var answers_buffer:[String] = []
     
-    var Questionid:String? = "1_9"
+    var Questionid:String?
     var globalnext:String?
     
     
