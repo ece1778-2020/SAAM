@@ -52,7 +52,9 @@ class ResultViewController: UIViewController {
                         }
                     print(self.Question)
                     for question in self.Question{
-                        self.Recommendations.append(contentsOf: self.Recommendations_dic[question]!)
+                        if self.Recommendations_dic[question] != nil{
+                            self.Recommendations.append(contentsOf: self.Recommendations_dic[question]!)
+                        }
                     }
                     self.RecommendationProcessing()
                     }
