@@ -110,9 +110,6 @@ class QuestionGenerator: UIViewController {
     func Ask_from_queue(){
         //pop the first question of the queue
         let id = self.next_q[0]
-        while self.question_list.contains(id){
-            self.next_q.remove(at: 0)
-        }
         Set_next_q(self.next_q)
         self.next_q.remove(at: 0)
         if id == "end"{

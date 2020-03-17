@@ -59,7 +59,9 @@ class SummaryViewController: UIViewController {
                     print("Questions:")
                     print(self.Question)
                     for question in self.Question{
-                        self.Recommendations.append(contentsOf: self.Recommendations_dic[question]!)
+                        if let recom = self.Recommendations_dic[question]{
+                        self.Recommendations.append(contentsOf: recom)
+                        }
                     }
                     self.RecommendationProcessing()
                     self.QAProcessing()
