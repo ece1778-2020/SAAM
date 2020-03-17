@@ -122,6 +122,7 @@ class ElevenChoicesViewController: UIViewController {
         self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":explainText], merge: true)
         
         if let recommendations = clsDic!["Recommendations"]{
+            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
             for recommendation in recommendations as! [String]{
                 temp.AddRecommendations(recommendation)
             }
@@ -144,6 +145,11 @@ class ElevenChoicesViewController: UIViewController {
             
             let cls = self.Class
             let clsDic = self.ClassDic[cls]
+            if let recommendations = clsDic!["Recommendations"]{
+                self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
+                for recommendation in recommendations as! [String]{
+                }
+            }
             
             var explainText = "Your choices was: \(self.SliderPosition.text!) \n"
             if let explains = clsDic!["Explain"]{

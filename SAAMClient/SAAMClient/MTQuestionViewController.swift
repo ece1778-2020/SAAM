@@ -113,6 +113,7 @@ class MTQuestionViewController: UIViewController {
             self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer], "QuestionBody":self.body.text], merge: true)
             let clsDic = self.ClassDic[answer]
             if let recommendations = clsDic!["Recommendations"]{
+            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
                 for recommendation in recommendations as! [String]{
                     temp.AddRecommendations(recommendation)
                 }
@@ -132,6 +133,12 @@ class MTQuestionViewController: UIViewController {
             self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Type":"MC","answer":answer])
             self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer], "QuestionBody":self.body.text], merge: true)
             let clsDic = self.ClassDic[answer]
+            
+            if let recommendations = clsDic!["Recommendations"]{
+            self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
+                for recommendation in recommendations as! [String]{
+                }
+            }
             
             temp.Q_A[self.Questionid!] = self.mapbutton[answer]
             temp.CollectionView.reloadData()

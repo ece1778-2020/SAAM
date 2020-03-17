@@ -19,6 +19,7 @@ class QuestionGenerator: UIViewController {
     var questionaire_name:String?
     var recommendations:[String] = []
     var question_list:[String] = []
+    var recommendations_list:[String:[String]] = [:]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -132,6 +133,8 @@ class QuestionGenerator: UIViewController {
                 let Result = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Result") as! ResultViewController
                 self.addChild(Result)
                 Result.view.frame = self.view.frame
+                Result.uid = self.uid
+                Result.TimeChoice = self.questionaire_name
                 self.view.addSubview(Result.view)
                 Result.didMove(toParent: self )
             }
@@ -196,6 +199,7 @@ class QuestionGenerator: UIViewController {
         }
     }
     
+
     func add_Order(_ order:String){
         let ref = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Order")
         ref.getDocument{(document,error)in
@@ -237,6 +241,24 @@ class QuestionGenerator: UIViewController {
         add_completed()
         performSegue(withIdentifier: "BackToProfile", sender: self)
     }
+    
+    func clean_recommendations(_ q_id:String){
+        if self.recommendations_list[q_id] != nil{
+            self.recommendations_list.removeValue(forKey: q_id)
+        }
+    }
+    
+    func AddRecommendations(_ q_id:String, _ recommendation:String){
+        if self.recommendations_list[q_id] != nil{
+            if self.recommendations_list[q_id]!.contains(recommendation){
+            }else{
+                self.recommendations_list[q_id]!.append(recommendation)
+            }
+        }else{
+            self.recommendations_list[q_id] = [recommendation]
+        }
+    }
+    
     
     func AddRecommendations(_ recommendation:String){
         if self.recommendations.contains(recommendation){

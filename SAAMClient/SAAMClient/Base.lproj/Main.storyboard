@@ -718,7 +718,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tc6-HK-lZN">
-                                <rect key="frame" x="40" y="134" width="334" height="638"/>
+                                <rect key="frame" x="40" y="188.5" width="334" height="583.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="20"/>
@@ -745,6 +745,12 @@
                                 <rect key="frame" x="324" y="49" width="50" height="25"/>
                                 <state key="normal" title="History"/>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Wait" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Cg-4B-1nK">
+                                <rect key="frame" x="40" y="134" width="334" height="34.5"/>
+                                <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -758,6 +764,9 @@
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="bottom" secondItem="SkL-iG-7Y5" secondAttribute="bottom" constant="40" id="IZW-m1-T1L"/>
                             <constraint firstItem="MY5-Er-M9u" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" id="Jww-CW-7f4"/>
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="Tc6-HK-lZN" secondAttribute="trailing" constant="40" id="KUU-LE-7TL"/>
+                            <constraint firstItem="0Cg-4B-1nK" firstAttribute="top" secondItem="w31-LI-mSt" secondAttribute="bottom" constant="20" id="QMS-FR-RBo"/>
+                            <constraint firstItem="0Cg-4B-1nK" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="40" id="UDT-c6-nzg"/>
+                            <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="0Cg-4B-1nK" secondAttribute="trailing" constant="40" id="XBR-b5-E3j"/>
                             <constraint firstItem="MY5-Er-M9u" firstAttribute="top" secondItem="OIx-3U-Vii" secondAttribute="top" constant="-20" id="ZSC-TG-LfX"/>
                             <constraint firstItem="w31-LI-mSt" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="40" id="bQl-Wc-Jre"/>
                             <constraint firstItem="lRH-jo-5cT" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="324" id="bka-1W-SbT"/>
@@ -765,17 +774,18 @@
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="lRH-jo-5cT" secondAttribute="trailing" constant="40" id="myY-Bu-t1D"/>
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="w31-LI-mSt" secondAttribute="trailing" constant="40" id="mzO-91-OFp"/>
                             <constraint firstItem="w31-LI-mSt" firstAttribute="top" secondItem="lRH-jo-5cT" secondAttribute="bottom" constant="10" id="rff-eN-keE"/>
-                            <constraint firstItem="Tc6-HK-lZN" firstAttribute="top" secondItem="w31-LI-mSt" secondAttribute="bottom" constant="20" id="y24-bX-YPY"/>
+                            <constraint firstItem="Tc6-HK-lZN" firstAttribute="top" secondItem="0Cg-4B-1nK" secondAttribute="bottom" constant="20" id="vK9-UU-cOf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jeq-TW-iZB"/>
                     </view>
                     <connections>
+                        <outlet property="Result_label" destination="0Cg-4B-1nK" id="x1m-S4-9Gx"/>
                         <outlet property="TextView" destination="Tc6-HK-lZN" id="acd-AO-743"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VN5-gk-cCv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2439.375" y="902.11267605633805"/>
+            <point key="canvasLocation" x="2439.130434782609" y="902.00892857142856"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
