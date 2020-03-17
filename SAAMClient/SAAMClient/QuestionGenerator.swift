@@ -246,5 +246,30 @@ class QuestionGenerator: UIViewController {
         }
     }
     
+    func To_history(){
+        let ToHistory = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Goback") as! GoBackViewController
+        ToHistory.uid = self.uid
+        ToHistory.TimeChoice = self.questionaire_name!
+        print(self.questionaire_name!)
+        self.addChild(ToHistory)
+        self.view.addSubview(ToHistory.view)
+    }
+    
+    func from_history(){
+        let ref = self.db.collection("logs").document(self.uid!)
+        ref.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    if let Current = data["Current"] as! String?{
+                        if Current != "None"{
+                            self.next_q = data["next_q"] as! [String]
+                            self.delete_Order()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
 
 }

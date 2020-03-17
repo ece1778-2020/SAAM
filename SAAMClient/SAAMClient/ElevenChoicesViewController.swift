@@ -20,6 +20,7 @@ class ElevenChoicesViewController: UIViewController {
     @IBOutlet weak var Left: UILabel!
     @IBOutlet weak var Right: UILabel!
     @IBOutlet weak var SliderPosition: UILabel!
+    @IBOutlet weak var History_button: UIButton!
     
     var Questionid:String?
     var LowerThan:[Int] = []
@@ -96,7 +97,14 @@ class ElevenChoicesViewController: UIViewController {
         }
     }
     
+    @IBAction func History(_ sender: UIButton) {
+        let temp = self.parent as! QuestionGenerator
+        self.view.removeFromSuperview()
+        temp.To_history()
+    }
+    
     @IBAction func submit(_ sender: Any) {
+        if (self.parent as? QuestionGenerator) != nil{
         let temp = self.parent as! QuestionGenerator
     self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"11choices","answer":self.SliderPosition.text,"QuestionBody":self.Question.text])
 
@@ -117,6 +125,7 @@ class ElevenChoicesViewController: UIViewController {
                 temp.AddRecommendations(recommendation)
             }
         }
+        
         if let Ask = clsDic!["Ask"]{
             let Ask = Ask as! Bool
             if Ask == true{
@@ -126,6 +135,27 @@ class ElevenChoicesViewController: UIViewController {
                 self.view.removeFromSuperview()
                 temp.next(clsDic!["next"] as! String)
             }
+            }
+            
+        }else if(self.parent as? GoBackViewController) != nil{
+            let temp = self.parent as! GoBackViewController
+            self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Type":"11choices","answer":self.SliderPosition.text,"QuestionBody":self.Question.text])
+            
+            let cls = self.Class
+            let clsDic = self.ClassDic[cls]
+            
+            var explainText = "Your choices was: \(self.SliderPosition.text!) \n"
+            if let explains = clsDic!["Explain"]{
+                for explain in explains as! [String]{
+                    explainText += (explain + "\n")
+                }
+            }
+            
+        self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":explainText], merge: true)
+            
+            temp.Q_A[self.Questionid!] = explainText
+            temp.CollectionView.reloadData()
+            self.view.removeFromSuperview()
         }
     }
     

@@ -50,20 +50,32 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="pxg-UX-39v">
                                 <rect key="frame" x="40" y="128" width="334" height="694"/>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6f-HN-Jh7">
+                                <rect key="frame" x="324" y="46" width="50" height="30"/>
+                                <state key="normal" title="History"/>
+                                <connections>
+                                    <action selector="History:" destination="wGa-lY-OwJ" eventType="touchUpInside" id="cgn-VR-28Z"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="xc3-D6-hrA" firstAttribute="bottom" secondItem="pxg-UX-39v" secondAttribute="bottom" constant="40" id="48x-36-tTr"/>
+                            <constraint firstItem="D6f-HN-Jh7" firstAttribute="leading" secondItem="xc3-D6-hrA" secondAttribute="leading" constant="324" id="4Wq-YR-jfc"/>
+                            <constraint firstItem="xc3-D6-hrA" firstAttribute="trailing" secondItem="D6f-HN-Jh7" secondAttribute="trailing" constant="40" id="7CS-gH-ww6"/>
                             <constraint firstItem="OhP-QZ-6Kq" firstAttribute="top" secondItem="xc3-D6-hrA" secondAttribute="top" constant="40" id="9Cx-SJ-kEk"/>
                             <constraint firstItem="OhP-QZ-6Kq" firstAttribute="leading" secondItem="xc3-D6-hrA" secondAttribute="leading" constant="40" id="9Sg-7Y-Tcv"/>
                             <constraint firstItem="xc3-D6-hrA" firstAttribute="trailing" secondItem="pxg-UX-39v" secondAttribute="trailing" constant="40" id="E9w-bB-Bmq"/>
+                            <constraint firstItem="OhP-QZ-6Kq" firstAttribute="top" secondItem="D6f-HN-Jh7" secondAttribute="bottom" constant="8" id="LSc-ih-hay"/>
                             <constraint firstItem="pxg-UX-39v" firstAttribute="leading" secondItem="xc3-D6-hrA" secondAttribute="leading" constant="40" id="VZv-z5-4h2"/>
                             <constraint firstItem="xc3-D6-hrA" firstAttribute="trailing" secondItem="OhP-QZ-6Kq" secondAttribute="trailing" constant="40" id="exP-bR-kN8"/>
                             <constraint firstItem="pxg-UX-39v" firstAttribute="top" secondItem="OhP-QZ-6Kq" secondAttribute="bottom" constant="20" id="lYk-bw-aWt"/>
+                            <constraint firstItem="D6f-HN-Jh7" firstAttribute="top" secondItem="xc3-D6-hrA" secondAttribute="top" constant="2" id="nFZ-TU-qzK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xc3-D6-hrA"/>
                     </view>
                     <connections>
+                        <outlet property="History_button" destination="D6f-HN-Jh7" id="vUI-Fq-da0"/>
                         <outlet property="StackView" destination="pxg-UX-39v" id="yaW-XN-gWH"/>
                         <outlet property="body" destination="OhP-QZ-6Kq" id="F1P-KF-gis"/>
                     </connections>
@@ -134,6 +146,13 @@
                                     <action selector="submit:" destination="U7b-aN-hDJ" eventType="touchUpInside" id="JFS-KL-Zqs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srE-XB-qxB">
+                                <rect key="frame" x="324" y="46" width="50" height="30"/>
+                                <state key="normal" title="History"/>
+                                <connections>
+                                    <action selector="History:" destination="U7b-aN-hDJ" eventType="touchUpInside" id="90m-XY-1Sp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -148,10 +167,13 @@
                             <constraint firstItem="A5o-Vy-EBQ" firstAttribute="top" secondItem="Kgf-uT-Yv6" secondAttribute="top" constant="40" id="OEd-Sw-sDV"/>
                             <constraint firstItem="Muj-NQ-gCX" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="20" id="UkT-Jr-1Pb"/>
                             <constraint firstItem="JW1-xB-dWf" firstAttribute="leading" secondItem="oUc-6g-MkS" secondAttribute="trailing" constant="10" id="Vav-YR-Qdo"/>
+                            <constraint firstItem="A5o-Vy-EBQ" firstAttribute="top" secondItem="srE-XB-qxB" secondAttribute="bottom" constant="8" id="VqP-tn-nwX"/>
                             <constraint firstItem="Kgf-uT-Yv6" firstAttribute="trailing" secondItem="A5o-Vy-EBQ" secondAttribute="trailing" constant="40" id="XGP-47-BTO"/>
                             <constraint firstItem="oUc-6g-MkS" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="20" id="aEU-aX-Sih"/>
                             <constraint firstItem="A5o-Vy-EBQ" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="40" id="aLf-8v-p3F"/>
+                            <constraint firstItem="srE-XB-qxB" firstAttribute="top" secondItem="Kgf-uT-Yv6" secondAttribute="top" constant="2" id="cM5-SI-aR3"/>
                             <constraint firstItem="Kgf-uT-Yv6" firstAttribute="trailing" secondItem="82f-Iv-YfD" secondAttribute="trailing" constant="40" id="dkk-wL-089"/>
+                            <constraint firstItem="Kgf-uT-Yv6" firstAttribute="trailing" secondItem="srE-XB-qxB" secondAttribute="trailing" constant="40" id="htP-2g-Pil"/>
                             <constraint firstItem="82f-Iv-YfD" firstAttribute="top" secondItem="JW1-xB-dWf" secondAttribute="bottom" constant="40" id="ian-l8-WBv"/>
                             <constraint firstItem="82f-Iv-YfD" firstAttribute="leading" secondItem="Kgf-uT-Yv6" secondAttribute="leading" constant="40" id="ibd-I3-eus"/>
                             <constraint firstItem="Kgf-uT-Yv6" firstAttribute="bottom" secondItem="kjn-to-Td3" secondAttribute="bottom" constant="40" id="oId-dE-d4D"/>
@@ -161,6 +183,7 @@
                         <viewLayoutGuide key="safeArea" id="Kgf-uT-Yv6"/>
                     </view>
                     <connections>
+                        <outlet property="History_button" destination="srE-XB-qxB" id="nDh-ui-cXq"/>
                         <outlet property="Left" destination="Muj-NQ-gCX" id="tf8-hQ-NOa"/>
                         <outlet property="Question" destination="A5o-Vy-EBQ" id="Tzk-oc-lRh"/>
                         <outlet property="Right" destination="Yi9-JY-Af4" id="Hty-vm-QQo"/>
@@ -496,6 +519,13 @@
                                     <action selector="Submit:" destination="eyY-sN-q0O" eventType="touchUpInside" id="sdE-Pr-FOf"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTx-rG-Z3M">
+                                <rect key="frame" x="304" y="49" width="50" height="25"/>
+                                <state key="normal" title="History"/>
+                                <connections>
+                                    <action selector="History:" destination="eyY-sN-q0O" eventType="touchUpInside" id="2SU-Q1-AQQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -503,16 +533,21 @@
                             <constraint firstItem="aO8-PF-b1i" firstAttribute="leading" secondItem="Agh-RX-1eW" secondAttribute="leading" constant="40" id="1vQ-GH-aIb"/>
                             <constraint firstItem="aO8-PF-b1i" firstAttribute="top" secondItem="pFC-io-wMK" secondAttribute="bottom" constant="20" id="9IE-kZ-fBI"/>
                             <constraint firstItem="Agh-RX-1eW" firstAttribute="trailing" secondItem="aO8-PF-b1i" secondAttribute="trailing" constant="40" id="AyR-h9-Dfb"/>
+                            <constraint firstItem="pFC-io-wMK" firstAttribute="top" secondItem="XTx-rG-Z3M" secondAttribute="bottom" constant="10" id="FhO-Xm-Mb5"/>
                             <constraint firstItem="pFC-io-wMK" firstAttribute="leading" secondItem="Agh-RX-1eW" secondAttribute="leading" constant="40" id="H73-Zr-Feb"/>
                             <constraint firstItem="zjc-G6-Ig3" firstAttribute="leading" secondItem="Agh-RX-1eW" secondAttribute="leading" constant="60" id="KUY-AY-Nli"/>
                             <constraint firstItem="zjc-G6-Ig3" firstAttribute="top" secondItem="aO8-PF-b1i" secondAttribute="bottom" constant="20" id="WAa-aM-6p1"/>
+                            <constraint firstItem="Agh-RX-1eW" firstAttribute="trailing" secondItem="XTx-rG-Z3M" secondAttribute="trailing" constant="60" id="WYA-Ss-Nm1"/>
                             <constraint firstItem="pFC-io-wMK" firstAttribute="top" secondItem="Agh-RX-1eW" secondAttribute="top" constant="40" id="d1b-f4-8zW"/>
+                            <constraint firstItem="XTx-rG-Z3M" firstAttribute="top" secondItem="Agh-RX-1eW" secondAttribute="top" constant="5" id="kF9-vf-rbe"/>
                             <constraint firstItem="Agh-RX-1eW" firstAttribute="trailing" secondItem="zjc-G6-Ig3" secondAttribute="trailing" constant="60" id="lxW-Cm-2ps"/>
+                            <constraint firstItem="XTx-rG-Z3M" firstAttribute="leading" secondItem="Agh-RX-1eW" secondAttribute="leading" constant="304" id="mnT-aA-3Pw"/>
                             <constraint firstItem="Agh-RX-1eW" firstAttribute="trailing" secondItem="pFC-io-wMK" secondAttribute="trailing" constant="40" id="xfM-4F-41u"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Agh-RX-1eW"/>
                     </view>
                     <connections>
+                        <outlet property="History_button" destination="XTx-rG-Z3M" id="7Pt-Ev-3tZ"/>
                         <outlet property="Textview" destination="aO8-PF-b1i" id="8pi-lR-Lef"/>
                         <outlet property="body" destination="pFC-io-wMK" id="Wcd-gu-PTV"/>
                     </connections>
@@ -575,12 +610,22 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="EOq-b3-Yrd"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="W88-Tt-7Cy"/>
                             </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TAM-Nr-eyU">
+                                <rect key="frame" x="324" y="49" width="50" height="25"/>
+                                <state key="normal" title="History"/>
+                                <connections>
+                                    <action selector="History:" destination="mmL-OE-ZkK" eventType="touchUpInside" id="AVO-0A-NCZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="aIm-WF-9i0" firstAttribute="top" secondItem="MqC-2I-r0V" secondAttribute="bottom" constant="20" id="3L1-6M-xbc"/>
+                            <constraint firstItem="MqC-2I-r0V" firstAttribute="top" secondItem="TAM-Nr-eyU" secondAttribute="bottom" constant="10" id="AYh-oK-TeW"/>
                             <constraint firstItem="I8l-yl-mIV" firstAttribute="leading" secondItem="sxd-IK-56O" secondAttribute="leading" constant="40" id="Ay7-x6-rXU"/>
+                            <constraint firstItem="TAM-Nr-eyU" firstAttribute="leading" secondItem="sxd-IK-56O" secondAttribute="leading" constant="324" id="HmM-cC-ldZ"/>
                             <constraint firstItem="aIm-WF-9i0" firstAttribute="leading" secondItem="sxd-IK-56O" secondAttribute="leading" constant="40" id="JVn-Xi-Avo"/>
+                            <constraint firstItem="TAM-Nr-eyU" firstAttribute="top" secondItem="sxd-IK-56O" secondAttribute="top" constant="5" id="TTg-UB-l1S"/>
                             <constraint firstItem="MqC-2I-r0V" firstAttribute="top" secondItem="sxd-IK-56O" secondAttribute="top" constant="40" id="VKq-1Y-nSM"/>
                             <constraint firstItem="sxd-IK-56O" firstAttribute="trailing" secondItem="aIm-WF-9i0" secondAttribute="trailing" constant="40" id="VYj-tf-85Z"/>
                             <constraint firstItem="I8l-yl-mIV" firstAttribute="top" secondItem="aIm-WF-9i0" secondAttribute="bottom" constant="40" id="ZyD-6o-19O"/>
@@ -588,17 +633,19 @@
                             <constraint firstItem="MqC-2I-r0V" firstAttribute="leading" secondItem="sxd-IK-56O" secondAttribute="leading" constant="40" id="iUM-hE-sKs"/>
                             <constraint firstItem="sxd-IK-56O" firstAttribute="trailing" secondItem="MqC-2I-r0V" secondAttribute="trailing" constant="40" id="lbC-td-JQK"/>
                             <constraint firstItem="sxd-IK-56O" firstAttribute="bottom" secondItem="I8l-yl-mIV" secondAttribute="bottom" constant="40" id="oqU-pc-cMR"/>
+                            <constraint firstItem="sxd-IK-56O" firstAttribute="trailing" secondItem="TAM-Nr-eyU" secondAttribute="trailing" constant="40" id="qGf-0J-50f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sxd-IK-56O"/>
                     </view>
                     <connections>
+                        <outlet property="History_button" destination="TAM-Nr-eyU" id="YR4-XG-ejw"/>
                         <outlet property="Stackview" destination="1xe-eN-fvv" id="H8c-Eu-OZx"/>
                         <outlet property="body" destination="MqC-2I-r0V" id="ZkQ-yb-PbD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ui8-rj-Grq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1655" y="898"/>
+            <point key="canvasLocation" x="1653.6231884057972" y="897.99107142857133"/>
         </scene>
         <!--Result View Controller-->
         <scene sceneID="3pK-A7-caL">
@@ -641,6 +688,10 @@
                                     <action selector="BacktoProfile:" destination="pNr-G7-xhX" eventType="touchUpInside" id="c5L-L3-8hu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRH-jo-5cT">
+                                <rect key="frame" x="324" y="49" width="50" height="25"/>
+                                <state key="normal" title="History"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -649,10 +700,14 @@
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="SkL-iG-7Y5" secondAttribute="trailing" constant="40" id="813-xm-RRa"/>
                             <constraint firstItem="Tc6-HK-lZN" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="40" id="C6I-C7-e8K"/>
                             <constraint firstItem="w31-LI-mSt" firstAttribute="top" secondItem="Jeq-TW-iZB" secondAttribute="top" constant="40" id="F1E-Wt-7Lg"/>
+                            <constraint firstItem="lRH-jo-5cT" firstAttribute="top" secondItem="Jeq-TW-iZB" secondAttribute="top" constant="5" id="HYs-2E-HA1"/>
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="bottom" secondItem="SkL-iG-7Y5" secondAttribute="bottom" constant="40" id="IZW-m1-T1L"/>
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="Tc6-HK-lZN" secondAttribute="trailing" constant="40" id="KUU-LE-7TL"/>
                             <constraint firstItem="w31-LI-mSt" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="40" id="bQl-Wc-Jre"/>
+                            <constraint firstItem="lRH-jo-5cT" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="324" id="bka-1W-SbT"/>
+                            <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="lRH-jo-5cT" secondAttribute="trailing" constant="40" id="myY-Bu-t1D"/>
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="w31-LI-mSt" secondAttribute="trailing" constant="40" id="mzO-91-OFp"/>
+                            <constraint firstItem="w31-LI-mSt" firstAttribute="top" secondItem="lRH-jo-5cT" secondAttribute="bottom" constant="10" id="rff-eN-keE"/>
                             <constraint firstItem="Tc6-HK-lZN" firstAttribute="top" secondItem="w31-LI-mSt" secondAttribute="bottom" constant="20" id="y24-bX-YPY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jeq-TW-iZB"/>
@@ -1290,6 +1345,12 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ng-72-lhY">
+                                <rect key="frame" x="207" y="448" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -1297,6 +1358,8 @@
                             <constraint firstItem="ie8-du-Boh" firstAttribute="trailing" secondItem="cRF-cT-GwT" secondAttribute="trailing" id="HCB-Vh-4Az"/>
                             <constraint firstItem="syu-uw-I8K" firstAttribute="top" secondItem="5uB-3Q-icX" secondAttribute="bottom" constant="20" id="M8M-Gh-xBh"/>
                             <constraint firstItem="ie8-du-Boh" firstAttribute="bottom" secondItem="syu-uw-I8K" secondAttribute="bottom" constant="40" id="Qff-yH-rsa"/>
+                            <constraint firstItem="4ng-72-lhY" firstAttribute="centerX" secondItem="yxv-1Z-k75" secondAttribute="centerX" id="TwR-0T-sT8"/>
+                            <constraint firstItem="4ng-72-lhY" firstAttribute="centerY" secondItem="yxv-1Z-k75" secondAttribute="centerY" id="XNY-yb-JCv"/>
                             <constraint firstAttribute="bottom" secondItem="cRF-cT-GwT" secondAttribute="bottom" id="bR8-GA-vqg"/>
                             <constraint firstItem="5uB-3Q-icX" firstAttribute="leading" secondItem="ie8-du-Boh" secondAttribute="leading" constant="20" id="d91-dC-KCZ"/>
                             <constraint firstItem="syu-uw-I8K" firstAttribute="leading" secondItem="ie8-du-Boh" secondAttribute="leading" constant="40" id="dfT-OG-LWe"/>
@@ -1309,6 +1372,7 @@
                     </view>
                     <connections>
                         <outlet property="CollectionView" destination="5uB-3Q-icX" id="kKn-Tz-EKe"/>
+                        <outlet property="Label" destination="4ng-72-lhY" id="an7-d8-QXW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vgi-OM-Lew" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

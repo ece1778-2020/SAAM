@@ -17,6 +17,7 @@ class MTQuestionViewController: UIViewController {
     @IBOutlet weak var body: UILabel!
     @IBOutlet weak var StackView: UIStackView!
     
+    @IBOutlet weak var History_button: UIButton!
     var buttons:[UIButton] = []
     var buttonmap: [String:String] = [:]
     var mapbutton: [String:String] = [:]
@@ -78,6 +79,12 @@ class MTQuestionViewController: UIViewController {
         }
     }
     
+    @IBAction func History(_ sender: UIButton) {
+        let temp = self.parent as! QuestionGenerator
+        self.view.removeFromSuperview()
+        temp.To_history()
+    }
+    
     //Asking if user want to go the sub questions
     func Asking_alert(_ Asking:String, _ dic: [String:Any]){
         let alert = UIAlertController(title: "Asking", message: Asking, preferredStyle: .alert)
@@ -98,25 +105,41 @@ class MTQuestionViewController: UIViewController {
     
     //process answers for subquestions
     func AnswerProcessing(_ answer:String){
-        let temp = self.parent as! QuestionGenerator
-        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MC","answer":answer])
-        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer], "QuestionBody":self.body.text], merge: true)
-        let clsDic = self.ClassDic[answer]
-        if let recommendations = clsDic!["Recommendations"]{
-            for recommendation in recommendations as! [String]{
-                temp.AddRecommendations(recommendation)
+        
+        
+        if (self.parent as? QuestionGenerator) != nil{
+            let temp = self.parent as! QuestionGenerator
+            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MC","answer":answer])
+            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer], "QuestionBody":self.body.text], merge: true)
+            let clsDic = self.ClassDic[answer]
+            if let recommendations = clsDic!["Recommendations"]{
+                for recommendation in recommendations as! [String]{
+                    temp.AddRecommendations(recommendation)
+                }
             }
-        }
-        if let Ask = clsDic!["Ask"]{
-            let Ask = Ask as! Bool
-            if Ask == true{
-                self.Asking_alert(clsDic!["Asking"] as! String, clsDic!)
-            }else{
-                let temp = self.parent as! QuestionGenerator
-                self.view.removeFromSuperview()
-                temp.next(clsDic!["next"] as! String)
+            if let Ask = clsDic!["Ask"]{
+                let Ask = Ask as! Bool
+                if Ask == true{
+                    self.Asking_alert(clsDic!["Asking"] as! String, clsDic!)
+                }else{
+                    let temp = self.parent as! QuestionGenerator
+                    self.view.removeFromSuperview()
+                    temp.next(clsDic!["next"] as! String)
+                }
             }
+        }else if(self.parent as? GoBackViewController) != nil{
+            let temp = self.parent as! GoBackViewController
+            self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Type":"MC","answer":answer])
+            self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer], "QuestionBody":self.body.text], merge: true)
+            let clsDic = self.ClassDic[answer]
+            
+            temp.Q_A[self.Questionid!] = self.mapbutton[answer]
+            temp.CollectionView.reloadData()
+            self.view.removeFromSuperview()
         }
+        
+        
+        
     }
     
     //button press on each option

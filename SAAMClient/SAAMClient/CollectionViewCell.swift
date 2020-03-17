@@ -10,6 +10,5 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var TextLabel: UILabel!
-    @IBOutlet weak var AnswerLabel: UILabel!
     
 }
