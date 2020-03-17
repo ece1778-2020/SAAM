@@ -3,7 +3,7 @@ platform :ios, '13.2'
 
 target 'SAAMClient' do
   # Comment the next line if you don't want to use dynamic frameworks
-  pod 'AFNetworking', '0.9.1'
+  # pod 'AFNetworking', '0.9.1'
   use_frameworks!
   #use_modular_headers!
   # Pods for SAAMClient
@@ -14,6 +14,8 @@ target 'SAAMClient' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'FirebaseFirestoreSwift'
+  pod 'Charts'
+  pod 'TinyConstraints'
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
 

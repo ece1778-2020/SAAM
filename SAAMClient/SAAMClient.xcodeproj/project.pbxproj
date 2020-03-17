@@ -14,6 +14,7 @@
 		C640AED224022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
 		C640AED324022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
 		C640AED424022FBC005BAEFE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C640AED124022FBC005BAEFE /* GoogleService-Info.plist */; };
+		C641491B24208889008E9915 /* SummaryPlotViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C641491A24208889008E9915 /* SummaryPlotViewController.swift */; };
 		C6580011240CCFF200BC7FF9 /* PDFPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C658000F240CCFF200BC7FF9 /* PDFPreviewViewController.swift */; };
 		C6580012240CCFF200BC7FF9 /* PDFCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6580010240CCFF200BC7FF9 /* PDFCreator.swift */; };
 		C8300CFF241E0226000C5FF7 /* GoBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8300CFE241E0226000C5FF7 /* GoBackViewController.swift */; };
@@ -62,6 +63,7 @@
 		C640AECD2400784D005BAEFE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		C640AECF24021CDB005BAEFE /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		C640AED124022FBC005BAEFE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C641491A24208889008E9915 /* SummaryPlotViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryPlotViewController.swift; sourceTree = "<group>"; };
 		C658000F240CCFF200BC7FF9 /* PDFPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFPreviewViewController.swift; sourceTree = "<group>"; };
 		C6580010240CCFF200BC7FF9 /* PDFCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PDFCreator.swift; sourceTree = "<group>"; };
 		C8300CFE241E0226000C5FF7 /* GoBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoBackViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				C8B67B34240D5C1C009CEFA2 /* SummaryViewController.swift */,
 				C8300CFE241E0226000C5FF7 /* GoBackViewController.swift */,
 				C85B143C241F300E00C55C6C /* CollectionViewCell.swift */,
+				C641491A24208889008E9915 /* SummaryPlotViewController.swift */,
 			);
 			path = SAAMClient;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				C88BE39624072A8B007E554E /* InitViewController.swift in Sources */,
 				C88BE39A24076295007E554E /* MTQuestionViewController.swift in Sources */,
 				C640AED024021CDB005BAEFE /* Profile.swift in Sources */,
+				C641491B24208889008E9915 /* SummaryPlotViewController.swift in Sources */,
 				C85B143D241F300E00C55C6C /* CollectionViewCell.swift in Sources */,
 				C88BE39E240777CF007E554E /* TenChoicesViewController.swift in Sources */,
 				C8300CFF241E0226000C5FF7 /* GoBackViewController.swift in Sources */,
