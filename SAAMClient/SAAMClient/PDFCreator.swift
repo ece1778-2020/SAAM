@@ -18,7 +18,7 @@ class PDFCreator: NSObject {
      }()
 
      lazy var marginPoint : CGPoint = {
-         return CGPoint(x: 10, y: 10)
+        return CGPoint(x: 0.6*72, y: 0.75*72)
      }()
 
      lazy var marginSize : CGSize = {
@@ -152,6 +152,8 @@ class PDFCreator: NSObject {
             if currentRange.location == CFAttributedStringGetLength(currentText) {
                 done = true
             }
+            let context = context.cgContext
+            drawTearOffs(context, pageRect: pageRect)
 
         } while !done
 
@@ -211,5 +213,27 @@ class PDFCreator: NSObject {
 
     }
     
-  
+    func drawTearOffs(_ drawContext: CGContext, pageRect: CGRect) {
+       // 2
+       drawContext.saveGState()
+       drawContext.setLineWidth(1.0)
+       
+       // 3
+       drawContext.move(to: CGPoint(x: 0.6*72 - 10, y: 0.75*72-10))
+       drawContext.addLine(to: CGPoint(x: pageRect.width - 0.6*72 + 10, y: 0.75*72-10))
+       
+       drawContext.move(to: CGPoint(x: 0.6*72 - 10, y: pageRect.height-0.75*72+10))
+       drawContext.addLine(to: CGPoint(x: pageRect.width - 0.6*72 + 10, y: pageRect.height-0.75*72+10))
+       
+       drawContext.move(to: CGPoint(x: 0.6*72 - 10, y: 0.75*72-10))
+       drawContext.addLine(to: CGPoint(x: 0.6*72 - 10, y: pageRect.height-0.75*72+10))
+       
+       drawContext.move(to: CGPoint(x: pageRect.width - 0.6*72 + 10, y: 0.75*72-10))
+       drawContext.addLine(to: CGPoint(x: pageRect.width - 0.6*72 + 10, y: pageRect.height-0.75*72+10))
+       
+       
+       drawContext.strokePath()
+       drawContext.restoreGState()
+       
+     }
 }

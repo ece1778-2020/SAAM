@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PDFKit
 import FirebaseAuth
 import FirebaseFirestore
 
@@ -67,12 +68,14 @@ class SummaryViewController: UIViewController {
     
     func RecommendationProcessing(){
         if self.Recommendations.count != 0{
-            self.TextView.text = self.TextView.text + "Recommendations:" + "\n"
+            self.TextView.text = self.TextView.text  +  "\n\n" + "Recommendations:" + "\n"
             var index = 1
             for recommendation in self.Recommendations{
                 self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
                 index += 1
             }
+            // add the segment
+            self.TextView.text = self.TextView.text + "----------------------------------------" + "-----------------------" + "\n"
         }
     }
     
@@ -84,6 +87,7 @@ class SummaryViewController: UIViewController {
         self.TextView.text = self.TextView.text + "\n" + "Your Answers:" + "\n"
         for id in self.Question{
             let A = id + ". " + self.Q_body[id]! + "\n \n" + self.Q_A[id]!
+            
             self.TextView.text = self.TextView.text + "\n" + A + "\n"
         }
     }
