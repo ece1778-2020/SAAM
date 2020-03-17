@@ -66,6 +66,7 @@ class ElevenChoicesViewController: UIViewController {
                 }
             }
         }
+        self.TextView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
     }
     
     @IBAction func ValueChanged(_ sender: UISlider) {

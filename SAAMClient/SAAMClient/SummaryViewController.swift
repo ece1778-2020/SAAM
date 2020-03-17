@@ -26,6 +26,7 @@ class SummaryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.TextView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         Assessment_Time.text = FormatTime
     }
     

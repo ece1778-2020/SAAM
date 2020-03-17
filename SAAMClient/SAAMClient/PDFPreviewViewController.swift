@@ -8,6 +8,8 @@ class PDFPreviewViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    pdfView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+    
     if let data = documentData {
       pdfView.document = PDFDocument(data: data)
       pdfView.autoScales = true
