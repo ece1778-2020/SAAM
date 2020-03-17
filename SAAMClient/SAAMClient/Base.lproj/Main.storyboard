@@ -108,7 +108,7 @@
                                 <rect key="frame" x="40" y="194.5" width="334" height="557.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="14"/>
+                                <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feeling Good" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-NQ-gCX">
@@ -129,8 +129,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srE-XB-qxB">
+                                <rect key="frame" x="324" y="46" width="50" height="30"/>
+                                <state key="normal" title="History"/>
+                                <connections>
+                                    <action selector="History:" destination="U7b-aN-hDJ" eventType="touchUpInside" id="90m-XY-1Sp"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kjn-to-Td3">
-                                <rect key="frame" x="41" y="496" width="240" height="30"/>
+                                <rect key="frame" x="87" y="760" width="240" height="30"/>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="TLE-O0-N6W"/>
@@ -144,13 +151,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="submit:" destination="U7b-aN-hDJ" eventType="touchUpInside" id="JFS-KL-Zqs"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="srE-XB-qxB">
-                                <rect key="frame" x="324" y="46" width="50" height="30"/>
-                                <state key="normal" title="History"/>
-                                <connections>
-                                    <action selector="History:" destination="U7b-aN-hDJ" eventType="touchUpInside" id="90m-XY-1Sp"/>
                                 </connections>
                             </button>
                         </subviews>
