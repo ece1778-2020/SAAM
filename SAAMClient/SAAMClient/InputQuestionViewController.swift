@@ -19,6 +19,7 @@ class InputQuestionViewController: UIViewController {
     //define the Question id and the next question
     var Questionid:String?
     var Next:String?
+    @IBOutlet weak var History_button: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +55,27 @@ class InputQuestionViewController: UIViewController {
     @IBAction func Submit(_ sender: Any) {
         if let next = Next{
             //save answer to DB
+            if (self.parent as? QuestionGenerator) != nil{
             let temp = self.parent as! QuestionGenerator
             self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"Input","answer":self.Textview.text, "AnswerBody":self.Textview.text, "QuestionBody":self.body.text])
             //Go to the next question by going back to the question generator
             self.view.removeFromSuperview()
             print(self.Textview.text)
             temp.next(next)
+            }else if(self.parent as? GoBackViewController) != nil{
+                let temp = self.parent as! GoBackViewController
+                self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Type":"Input","answer":self.Textview.text, "AnswerBody":self.Textview.text, "QuestionBody":self.body.text])
+                //Go to the next question by going back to the question generator
+                self.view.removeFromSuperview()
+                print(self.Textview.text)
+            }
         }
+    }
+    
+    @IBAction func History(_ sender: UIButton) {
+        let temp = self.parent as! QuestionGenerator
+        self.view.removeFromSuperview()
+        temp.To_history()
     }
     
 

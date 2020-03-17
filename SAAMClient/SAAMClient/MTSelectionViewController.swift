@@ -16,6 +16,8 @@ class MTSelectionViewController: UIViewController {
     @IBOutlet weak var body: UILabel!
     @IBOutlet weak var Stackview: UIStackView!
     
+    @IBOutlet weak var History_button: UIButton!
+    
     
     var buttons:[UIButton] = []
     var buttonmap: [String:String] = [:]
@@ -24,7 +26,7 @@ class MTSelectionViewController: UIViewController {
     var not_next:[String] = []
     var answers_buffer:[String] = []
     
-    var Questionid:String? = "1_9"
+    var Questionid:String?
     var globalnext:String?
     
     
@@ -138,26 +140,57 @@ class MTSelectionViewController: UIViewController {
         }
     }
     
-    @IBAction func Submit(_ sender: UIButton) {
-        var selected:[String] = []
+    @IBAction func History(_ sender: UIButton) {
         let temp = self.parent as! QuestionGenerator
+        self.view.removeFromSuperview()
+        temp.To_history()
+    }
+    
+    @IBAction func Submit(_ sender: UIButton) {
+
+       
+       if (self.parent as? QuestionGenerator) != nil{
+            var selected:[String] = []
+            let temp = self.parent as! QuestionGenerator
+            var index = 0
+            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MS", "QuestionBody":self.body.text])
+            var answerbody = "You selected:"
+            for button in self.buttons{
+                if(button.backgroundColor == UIColor.red){
+                    selected.append(self.buttonmap[button.currentTitle!]!)
+                    //self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["\(index)":self.buttonmap[button.currentTitle!]!], merge: true)
+                    self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).collection("Answers").document(String(index)).setData(["ID":self.buttonmap[button.currentTitle!]!], merge: true)
+                        
+                        answerbody += ("\n"+button.currentTitle!)
+                    
+                    index += 1
+                }
+            }
+            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":answerbody], merge: true)
+            self.answers_buffer = selected
+            self.AnswerProcessing()
+       }else if(self.parent as? GoBackViewController) != nil{
+        var selected:[String] = []
+        let temp = self.parent as! GoBackViewController
         var index = 0
-        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MS", "QuestionBody":self.body.text])
+        self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Type":"MS", "QuestionBody":self.body.text])
         var answerbody = "You selected:"
         for button in self.buttons{
             if(button.backgroundColor == UIColor.red){
                 selected.append(self.buttonmap[button.currentTitle!]!)
                 //self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["\(index)":self.buttonmap[button.currentTitle!]!], merge: true)
-                self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).collection("Answers").document(String(index)).setData(["ID":self.buttonmap[button.currentTitle!]!], merge: true)
+                self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).collection("Answers").document(String(index)).setData(["ID":self.buttonmap[button.currentTitle!]!], merge: true)
                     
                     answerbody += ("\n"+button.currentTitle!)
                 
                 index += 1
             }
         }
-        self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":answerbody], merge: true)
-        self.answers_buffer = selected
-        self.AnswerProcessing()
+        self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":answerbody], merge: true)
+        temp.Q_A[self.Questionid!] = answerbody
+        temp.CollectionView.reloadData()
+        self.view.removeFromSuperview()
+        }
     }
     
 

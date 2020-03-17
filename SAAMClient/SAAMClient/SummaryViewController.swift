@@ -44,7 +44,10 @@ class SummaryViewController: UIViewController {
                             let data = document.data()
                             if document.documentID == "Recommendations"{
                                 self.Recommendations = data["Recommendations"] as! [String]
+                            }else if document.documentID == "Order"{
+                                print("order")
                             }else{
+                                print()
                                 self.Question.append(document.documentID)
                                 self.Q_body[document.documentID] = data["QuestionBody"] as! String
                                 self.Q_A[document.documentID] = data["AnswerBody"] as! String
