@@ -58,6 +58,7 @@ class InputQuestionViewController: UIViewController {
             if (self.parent as? QuestionGenerator) != nil{
             let temp = self.parent as! QuestionGenerator
             self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"Input","answer":self.Textview.text, "AnswerBody":self.Textview.text, "QuestionBody":self.body.text])
+                
             //Go to the next question by going back to the question generator
             self.view.removeFromSuperview()
             print(self.Textview.text)

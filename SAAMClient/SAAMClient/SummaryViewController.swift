@@ -21,6 +21,7 @@ class SummaryViewController: UIViewController {
     var Q_A:[String:String] = [:]
     var Q_body:[String:String] = [:]
     var Q_Abody: [String:String] = [:]
+    var Recommendations_dic:[String:[String]] = [:]
     
     @IBOutlet weak var Assessment_Time: UILabel!
     @IBOutlet weak var TextView: UITextView!
@@ -45,19 +46,22 @@ class SummaryViewController: UIViewController {
                         for document in snapshot!.documents{
                             let data = document.data()
                             if document.documentID == "Recommendations"{
-                                self.Recommendations = data["Recommendations"] as! [String]
                             }else if document.documentID == "Order"{
-                                print("order")
+                                self.Question = data["Order"] as! [String]
                             }else{
-                                print()
+                                if data["Recommendations"] != nil{
+                                    self.Recommendations_dic[document.documentID] = data["Recommendations"] as! [String]
+                                }
                                 self.Question.append(document.documentID)
                                 self.Q_body[document.documentID] = data["QuestionBody"] as! String
                                 self.Q_A[document.documentID] = data["AnswerBody"] as! String
                             }
                         }
-                    self.Question.sort(by: <)
                     print("Questions:")
                     print(self.Question)
+                    for question in self.Question{
+                        self.Recommendations.append(contentsOf: self.Recommendations_dic[question]!)
+                    }
                     self.RecommendationProcessing()
                     self.QAProcessing()
                     }

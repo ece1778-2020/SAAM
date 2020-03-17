@@ -116,6 +116,13 @@ class MTSelectionViewController: UIViewController {
             let dic = self.ClassDic[answer]
             let temp = self.parent as! QuestionGenerator
             if let recommendations = dic!["Recommendations"]{
+                if (self.parent as? QuestionGenerator) != nil{
+                    let temp = self.parent as! QuestionGenerator
+                    self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
+                }else if(self.parent as? GoBackViewController) != nil{
+                let temp = self.parent as! GoBackViewController
+                self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
+                }
                 for recommendation in recommendations as! [String]{
                     temp.AddRecommendations(recommendation)
                 }
