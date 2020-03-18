@@ -611,9 +611,9 @@
                                 <rect key="frame" x="0.0" y="-20" width="414" height="936"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MqC-2I-r0V">
-                                <rect key="frame" x="40" y="84" width="334" height="120"/>
+                                <rect key="frame" x="40" y="84" width="334" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="120" id="VYQ-de-r3a"/>
+                                    <constraint firstAttribute="height" constant="200" id="VYQ-de-r3a"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="25"/>
                                 <nil key="textColor"/>
@@ -637,7 +637,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aIm-WF-9i0">
-                                <rect key="frame" x="40" y="224" width="334" height="528"/>
+                                <rect key="frame" x="40" y="304" width="334" height="448"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1xe-eN-fvv">
                                         <rect key="frame" x="20" y="20" width="294" height="1000"/>
@@ -1063,7 +1063,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fHC-R4-5cQ">
-                                <rect key="frame" x="50" y="414" width="314" height="45"/>
+                                <rect key="frame" x="50" y="499" width="314" height="45"/>
                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="25"/>
                                 <state key="normal" title="Sign Out">
@@ -1071,6 +1071,17 @@
                                 </state>
                                 <connections>
                                     <action selector="signoutButtonTapped:" destination="dZH-VK-en6" eventType="touchUpInside" id="3c5-Ym-BvT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMb-J6-YEs">
+                                <rect key="frame" x="50" y="414" width="314" height="45"/>
+                                <color key="backgroundColor" systemColor="opaqueSeparatorColor" red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="MarkerFelt-Wide" family="Marker Felt" pointSize="25"/>
+                                <state key="normal" title="Trend Report">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2Z8-cI-twM" kind="presentation" identifier="ToTrends" modalPresentationStyle="fullScreen" id="WVH-wq-6IF"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1083,19 +1094,22 @@
                             <constraint firstItem="fHC-R4-5cQ" firstAttribute="centerX" secondItem="q7Z-hc-sjx" secondAttribute="centerX" id="7eb-oO-Qxc"/>
                             <constraint firstItem="TOK-bw-iJu" firstAttribute="height" secondItem="q7Z-hc-sjx" secondAttribute="height" multiplier="0.0616197" id="8hd-k4-nOV"/>
                             <constraint firstItem="AhT-ua-LOh" firstAttribute="trailing" secondItem="Koa-wF-Inm" secondAttribute="trailing" constant="50" id="9aa-dl-JZE"/>
+                            <constraint firstItem="AhT-ua-LOh" firstAttribute="trailing" secondItem="JMb-J6-YEs" secondAttribute="trailing" constant="50" id="B8j-v4-xCh"/>
                             <constraint firstItem="HTH-Ny-Cfu" firstAttribute="centerX" secondItem="q7Z-hc-sjx" secondAttribute="centerX" id="CnD-Rv-VvF"/>
                             <constraint firstItem="Koa-wF-Inm" firstAttribute="top" secondItem="HTH-Ny-Cfu" secondAttribute="bottom" constant="30" id="E6l-vj-WtJ"/>
                             <constraint firstItem="mTf-pd-sJw" firstAttribute="leading" secondItem="AhT-ua-LOh" secondAttribute="leading" constant="50" id="Ozq-3P-S3x"/>
-                            <constraint firstItem="fHC-R4-5cQ" firstAttribute="top" secondItem="mTf-pd-sJw" secondAttribute="bottom" constant="40" id="QCO-An-gTo"/>
                             <constraint firstItem="AhT-ua-LOh" firstAttribute="trailing" secondItem="fHC-R4-5cQ" secondAttribute="trailing" constant="50" id="R6o-gh-dsx"/>
+                            <constraint firstItem="JMb-J6-YEs" firstAttribute="top" secondItem="mTf-pd-sJw" secondAttribute="bottom" constant="40" id="S5z-Mx-tF9"/>
                             <constraint firstItem="HTH-Ny-Cfu" firstAttribute="top" secondItem="TOK-bw-iJu" secondAttribute="bottom" constant="10" id="Trr-I0-mID"/>
                             <constraint firstItem="fHC-R4-5cQ" firstAttribute="leading" secondItem="AhT-ua-LOh" secondAttribute="leading" constant="50" id="WXe-1j-7B8"/>
                             <constraint firstItem="Koa-wF-Inm" firstAttribute="leading" secondItem="AhT-ua-LOh" secondAttribute="leading" constant="50" id="Wcy-W4-2ZL"/>
                             <constraint firstItem="Y0s-D9-eby" firstAttribute="top" secondItem="q7Z-hc-sjx" secondAttribute="top" constant="-20" id="Wof-L8-bon"/>
                             <constraint firstItem="AhT-ua-LOh" firstAttribute="trailing" secondItem="mTf-pd-sJw" secondAttribute="trailing" constant="50" id="aFR-Sf-BRH"/>
+                            <constraint firstItem="fHC-R4-5cQ" firstAttribute="top" secondItem="JMb-J6-YEs" secondAttribute="bottom" constant="40" id="coR-db-Tdh"/>
                             <constraint firstItem="TOK-bw-iJu" firstAttribute="centerX" secondItem="q7Z-hc-sjx" secondAttribute="centerX" id="dwo-Zy-dX8"/>
                             <constraint firstItem="HTH-Ny-Cfu" firstAttribute="width" secondItem="q7Z-hc-sjx" secondAttribute="width" multiplier="0.54375" id="h7Q-Lq-hAn"/>
                             <constraint firstItem="Y0s-D9-eby" firstAttribute="trailing" secondItem="AhT-ua-LOh" secondAttribute="trailing" id="lYu-rf-1Jw"/>
+                            <constraint firstItem="JMb-J6-YEs" firstAttribute="leading" secondItem="AhT-ua-LOh" secondAttribute="leading" constant="50" id="s0J-1f-q6D"/>
                             <constraint firstItem="TOK-bw-iJu" firstAttribute="width" secondItem="q7Z-hc-sjx" secondAttribute="width" multiplier="0.76875" id="sIe-DR-pnj"/>
                             <constraint firstItem="mTf-pd-sJw" firstAttribute="top" secondItem="Koa-wF-Inm" secondAttribute="bottom" constant="40" id="xSh-dR-rnc"/>
                         </constraints>
@@ -1499,6 +1513,21 @@
             </objects>
             <point key="canvasLocation" x="-713.04347826086962" y="2353.125"/>
         </scene>
+        <!--Trends View Controller-->
+        <scene sceneID="Vrc-1F-gub">
+            <objects>
+                <viewController id="2Z8-cI-twM" customClass="TrendsViewController" customModule="SAAMClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cbS-h7-8js">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="U7e-gq-BWk"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="laf-gT-dDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-743" y="3104"/>
+        </scene>
     </scenes>
     <resources>
         <image name="1200238" width="750" height="1624"/>
@@ -1509,8 +1538,8 @@
         <image name="printer" catalog="system" width="64" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ce5-aH-jf8"/>
-        <segue reference="lTH-cQ-abQ"/>
-        <segue reference="Dra-KX-zT0"/>
+        <segue reference="9Pn-Sp-hVM"/>
+        <segue reference="Fy4-DA-j2B"/>
+        <segue reference="e9h-Qu-h6v"/>
     </inferredMetricsTieBreakers>
 </document>
