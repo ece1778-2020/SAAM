@@ -74,9 +74,11 @@ class ResultViewController: UIViewController {
                     if level == 0{
                         level = 1
                     }
+                }else if recommendation.contains("Mild") || recommendation.contains("good"){
+                }else{
+                    self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
+                    index += 1
                 }
-                self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
-                index += 1
             }
         }
         
@@ -92,7 +94,7 @@ class ResultViewController: UIViewController {
         }
         
 
-        self.TextView.text =  "Recommendations:" + "\n" + self.TextView.text
+        self.TextView.text =  "Self-management tips:" + "\n" + self.TextView.text
         
         
     }
