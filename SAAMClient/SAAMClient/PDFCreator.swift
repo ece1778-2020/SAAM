@@ -25,7 +25,8 @@ class PDFCreator: NSObject {
          return CGSize(width: self.marginPoint.x * 2 , height: self.marginPoint.y * 2)
      }()
     
-    init(title: String, Body:String) {
+    init(title: String, Recommendations:String, Questions:String) {
+    let Body = Recommendations + "\n" + Questions
     let now = Date()
     let formatter = DateFormatter()
     formatter.timeZone = TimeZone.current
@@ -34,7 +35,7 @@ class PDFCreator: NSObject {
     //self.title = title + "SAAM Report \n" + "-  " + dateString
     self.title = "\n\n\n\n\n" + "SAAM Report" + "\n" + title
     self.body = "The patient information is showed here!" + Body
-  }
+    }
   
     func createFlyer() -> Data {
       // 1
