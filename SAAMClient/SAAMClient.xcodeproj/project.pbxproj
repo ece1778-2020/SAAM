@@ -37,6 +37,7 @@
 		C8B744FF2400611B00190923 /* SAAMClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B744FE2400611B00190923 /* SAAMClientTests.swift */; };
 		C8B7450A2400611B00190923 /* SAAMClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B745092400611B00190923 /* SAAMClientUITests.swift */; };
 		C8CAD2632421A0960037D09E /* TrendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8CAD2622421A0960037D09E /* TrendsViewController.swift */; };
+		C8DAF1612429981B003E5FB6 /* SkipParaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8DAF1602429981B003E5FB6 /* SkipParaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		C8B745092400611B00190923 /* SAAMClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SAAMClientUITests.swift; sourceTree = "<group>"; };
 		C8B7450B2400611B00190923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C8CAD2622421A0960037D09E /* TrendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendsViewController.swift; sourceTree = "<group>"; };
+		C8DAF1602429981B003E5FB6 /* SkipParaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkipParaViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 				C85B143C241F300E00C55C6C /* CollectionViewCell.swift */,
 				C641491A24208889008E9915 /* SummaryPlotViewController.swift */,
 				C8CAD2622421A0960037D09E /* TrendsViewController.swift */,
+				C8DAF1602429981B003E5FB6 /* SkipParaViewController.swift */,
 			);
 			path = SAAMClient;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C88BE3A82409F811007E554E /* ResultViewController.swift in Sources */,
+				C8DAF1612429981B003E5FB6 /* SkipParaViewController.swift in Sources */,
 				C88BE3A224085A70007E554E /* InputQuestionViewController.swift in Sources */,
 				C640AECC24007833005BAEFE /* LoginViewController.swift in Sources */,
 				C88BE398240759A1007E554E /* QuestionGenerator.swift in Sources */,
