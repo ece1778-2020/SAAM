@@ -70,7 +70,7 @@ class ResultViewController: UIViewController {
             for recommendation in self.Recommendations{
                 if recommendation.contains("Severe") || recommendation.contains("Bad")  {
                     level = 2
-                }else if recommendation.contains("Moderate"){
+                }else if recommendation.contains("Moderate")||recommendation.contains("moderate"){
                     if level == 0{
                         level = 1
                     }
@@ -79,6 +79,11 @@ class ResultViewController: UIViewController {
                     self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
                     index += 1
                 }
+            }
+            if index == 1{
+                self.TextView.text = "We don't have any suggestions for self-management tips based on your answers. \nPlease skip less questions in order to get more actuate results and recommendations"
+            }else{
+                self.TextView.text =  "Self-management tips:" + "\n" + self.TextView.text
             }
         }
         
@@ -94,7 +99,7 @@ class ResultViewController: UIViewController {
         }
         
 
-        self.TextView.text =  "Self-management tips:" + "\n" + self.TextView.text
+        
         
         
     }

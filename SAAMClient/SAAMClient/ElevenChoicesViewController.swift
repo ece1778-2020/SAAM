@@ -52,7 +52,6 @@ class ElevenChoicesViewController: UIViewController {
         }
     Question_ref.collection("OptionsLowerThan").getDocuments{(snapshot,error)in
         if let error = error{
-            print(error.localizedDescription)
         }else{
             if snapshot != nil{
                     for document in snapshot!.documents{
@@ -78,7 +77,6 @@ class ElevenChoicesViewController: UIViewController {
     
     
     func AnswerClassifier(_ answer:Int){
-        print(answer)
         for item in LowerThan{
             if answer <= item{
                 self.Class = item
@@ -107,7 +105,7 @@ class ElevenChoicesViewController: UIViewController {
     @IBAction func submit(_ sender: Any) {
         if (self.parent as? QuestionGenerator) != nil{
         let temp = self.parent as! QuestionGenerator
-    self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"11choices","answer":self.SliderPosition.text,"QuestionBody":self.Question.text])
+    self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"11choices","answer":self.SliderPosition.text!,"QuestionBody":self.Question.text!])
 
         let cls = self.Class
         let clsDic = self.ClassDic[cls]
@@ -120,6 +118,12 @@ class ElevenChoicesViewController: UIViewController {
         }
         
         self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":explainText], merge: true)
+            
+            if let next = clsDic!["next"]{
+                temp.skip_updater(Questionid: self.Questionid!, Answer: explainText, next: next as! String, Question_body:self.Question.text!)
+            }else{
+                temp.skip_updater(Questionid: self.Questionid!, Answer: explainText, next: clsDic!["False_next"] as! String, Question_body:self.Question.text!)
+            }
         
         if let recommendations = clsDic!["Recommendations"]{
             self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
@@ -141,14 +145,12 @@ class ElevenChoicesViewController: UIViewController {
             
         }else if(self.parent as? GoBackViewController) != nil{
             let temp = self.parent as! GoBackViewController
-            self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Type":"11choices","answer":self.SliderPosition.text,"QuestionBody":self.Question.text])
+            self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Type":"11choices","answer":self.SliderPosition.text!,"QuestionBody":self.Question.text!])
             
             let cls = self.Class
             let clsDic = self.ClassDic[cls]
             if let recommendations = clsDic!["Recommendations"]{
                 self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
-                for recommendation in recommendations as! [String]{
-                }
             }
             
             var explainText = "Your choices was: \(self.SliderPosition.text!) \n"
@@ -158,6 +160,11 @@ class ElevenChoicesViewController: UIViewController {
                 }
             }
             
+            if let next = clsDic!["next"]{
+                temp.skip_updater(Questionid: self.Questionid!, Answer: explainText, next: next as! String, Question_body:self.Question.text!)
+            }else{
+                temp.skip_updater(Questionid: self.Questionid!, Answer: explainText, next: clsDic!["False_next"] as! String, Question_body:self.Question.text!)
+            }
         self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":explainText], merge: true)
             
             temp.Q_A[self.Questionid!] = explainText

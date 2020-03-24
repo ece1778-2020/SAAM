@@ -8,11 +8,6 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="TimesNewRoman.ttf">
-            <string>.SFUI-Regular</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Init View Controller-->
         <scene sceneID="oTJ-dh-VXN">
@@ -129,7 +124,7 @@
                                 <rect key="frame" x="40" y="203" width="334" height="549"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" name=".SFUI-Regular" family=".AppleSystemUIFont" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feeling Good" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Muj-NQ-gCX">
@@ -526,7 +521,7 @@
                                     <constraint firstAttribute="width" secondItem="aO8-PF-b1i" secondAttribute="height" multiplier="1:1" id="CwJ-92-7hH"/>
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -721,7 +716,7 @@
                                 <rect key="frame" x="40" y="188.5" width="334" height="583.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SkL-iG-7Y5">
@@ -741,10 +736,6 @@
                                     <action selector="BacktoProfile:" destination="pNr-G7-xhX" eventType="touchUpInside" id="c5L-L3-8hu"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lRH-jo-5cT">
-                                <rect key="frame" x="324" y="49" width="50" height="25"/>
-                                <state key="normal" title="History"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Wait" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Cg-4B-1nK">
                                 <rect key="frame" x="40" y="134" width="334" height="34.5"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="30"/>
@@ -760,7 +751,6 @@
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="SkL-iG-7Y5" secondAttribute="trailing" constant="40" id="813-xm-RRa"/>
                             <constraint firstItem="Tc6-HK-lZN" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="40" id="C6I-C7-e8K"/>
                             <constraint firstItem="w31-LI-mSt" firstAttribute="top" secondItem="Jeq-TW-iZB" secondAttribute="top" constant="40" id="F1E-Wt-7Lg"/>
-                            <constraint firstItem="lRH-jo-5cT" firstAttribute="top" secondItem="Jeq-TW-iZB" secondAttribute="top" constant="5" id="HYs-2E-HA1"/>
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="bottom" secondItem="SkL-iG-7Y5" secondAttribute="bottom" constant="40" id="IZW-m1-T1L"/>
                             <constraint firstItem="MY5-Er-M9u" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" id="Jww-CW-7f4"/>
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="Tc6-HK-lZN" secondAttribute="trailing" constant="40" id="KUU-LE-7TL"/>
@@ -769,11 +759,8 @@
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="0Cg-4B-1nK" secondAttribute="trailing" constant="40" id="XBR-b5-E3j"/>
                             <constraint firstItem="MY5-Er-M9u" firstAttribute="top" secondItem="OIx-3U-Vii" secondAttribute="top" constant="-20" id="ZSC-TG-LfX"/>
                             <constraint firstItem="w31-LI-mSt" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="40" id="bQl-Wc-Jre"/>
-                            <constraint firstItem="lRH-jo-5cT" firstAttribute="leading" secondItem="Jeq-TW-iZB" secondAttribute="leading" constant="324" id="bka-1W-SbT"/>
                             <constraint firstAttribute="bottom" secondItem="MY5-Er-M9u" secondAttribute="bottom" constant="-20" id="lTt-Xe-tk2"/>
-                            <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="lRH-jo-5cT" secondAttribute="trailing" constant="40" id="myY-Bu-t1D"/>
                             <constraint firstItem="Jeq-TW-iZB" firstAttribute="trailing" secondItem="w31-LI-mSt" secondAttribute="trailing" constant="40" id="mzO-91-OFp"/>
-                            <constraint firstItem="w31-LI-mSt" firstAttribute="top" secondItem="lRH-jo-5cT" secondAttribute="bottom" constant="10" id="rff-eN-keE"/>
                             <constraint firstItem="Tc6-HK-lZN" firstAttribute="top" secondItem="0Cg-4B-1nK" secondAttribute="bottom" constant="20" id="vK9-UU-cOf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Jeq-TW-iZB"/>
@@ -1328,7 +1315,7 @@
                                 <rect key="frame" x="40" y="188" width="334" height="584"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="20"/>
+                                <fontDescription key="fontDescription" name="GeezaPro" family="Geeza Pro" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dna-57-GGW">
@@ -1452,7 +1439,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="105" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moc-pY-Se9">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moc-pY-Se9">
                                                     <rect key="frame" x="20" y="-10" width="65" height="125"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1505,6 +1492,7 @@
                         <viewLayoutGuide key="safeArea" id="ie8-du-Boh"/>
                     </view>
                     <connections>
+                        <outlet property="Button" destination="syu-uw-I8K" id="OUb-8R-bNb"/>
                         <outlet property="CollectionView" destination="5uB-3Q-icX" id="kKn-Tz-EKe"/>
                         <outlet property="Label" destination="4ng-72-lhY" id="an7-d8-QXW"/>
                     </connections>
@@ -1538,8 +1526,8 @@
         <image name="printer" catalog="system" width="64" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9Pn-Sp-hVM"/>
-        <segue reference="Fy4-DA-j2B"/>
+        <segue reference="fXI-WE-O3k"/>
+        <segue reference="7yI-kX-B5s"/>
         <segue reference="e9h-Qu-h6v"/>
     </inferredMetricsTieBreakers>
 </document>

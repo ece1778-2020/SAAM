@@ -76,8 +76,8 @@ class SummaryViewController: UIViewController {
     
     func RecommendationProcessing(){
         if self.Recommendations.count != 0{
-            self.TextView.text = self.TextView.text  +  "\n\n" + "Recommendations:" + "\n"
-            self.recommendations = self.recommendations  +  "\n\n" + "Recommendations:" + "\n"
+            self.TextView.text = self.TextView.text   + "Recommendations:" + "\n"
+            self.recommendations = self.recommendations  + "Recommendations:" + "\n"
             var index = 1
             for recommendation in self.Recommendations{
                 self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
@@ -85,7 +85,7 @@ class SummaryViewController: UIViewController {
                 self.recommendations = self.recommendations + "\n" + String(index)+". " + recommendation + "\n"
             }
             // add the segment
-            self.TextView.text = self.TextView.text + "----------------------------------------" + "-----------------------" + "\n"
+            self.TextView.text = self.TextView.text + "----------------------------------------"  + "\n"
         }
     }
     
