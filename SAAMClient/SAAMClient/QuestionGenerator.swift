@@ -20,19 +20,20 @@ class QuestionGenerator: UIViewController {
     var recommendations:[String] = []
     var question_list:[String] = []
     var recommendations_list:[String:[String]] = [:]
+    
+    var user_ignoring:Bool = false
+    var user_skip_Comfirm_period = 4
+    var user_skip_period = 4
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //get questionaire name by setting it to a timestamp
-        //Go to the first question
-        //QuestionProcess(Questionid: "1")
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         //get the user's uid
         if let uid = Auth.auth().currentUser?.uid {
             self.uid = uid;
+            get_skipper_para(user_id: uid)
         }
         
         Set_Temp(self.questionaire_name!)
@@ -43,10 +44,11 @@ class QuestionGenerator: UIViewController {
     let db = Firestore.firestore()
     
     func QuestionProcess(Questionid:String){
-        if(Questionid != "end"){
-            self.add_Order(Questionid)
-            self.question_list.append(Questionid)
-        }
+//        if(Questionid != "end"){
+//            self.add_Order(Questionid){
+//                self.question_list.append(Questionid)
+//            }
+//        }
         //Classify questions
         let Question_ref = db.collection("Questions").document("ESSAS_Main").collection("Questions").document(Questionid)
         Question_ref.getDocument{(document,error)in
@@ -58,6 +60,114 @@ class QuestionGenerator: UIViewController {
         }
     }
     
+    func get_skipper_para(user_id:String){
+        let skipper_para = db.collection("logs").document(self.uid!)
+        skipper_para.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    self.user_ignoring = data["skip"] as! Bool
+                    self.user_skip_Comfirm_period = data["skip_Conform_period"] as! Int
+                    self.user_skip_period = data["skip_period"] as! Int
+                }
+            }
+        }
+    }
+    
+    func skip_updater(Questionid:String, Answer:String, next:String, Question_body:String){
+        print("[info skip_updater]: Answer:\(Answer)")
+        let Question_ref = db.collection("logs").document(self.uid!).collection("Q_ignore").document(Questionid)
+        Question_ref.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    let ignoring = data["ignoring"] as! Bool
+                    let remaining = data["remaining"] as! Int
+                    let Last_ans = data["Last_answer"] as! String
+                    let Last_assessment = data["Last_assessment"] as! String
+                    
+                    if ignoring == false{
+                        if Last_ans != Answer{
+                            Question_ref.setData(["ignoring":false, "remaining":self.user_skip_Comfirm_period, "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                        }else{
+                            if remaining > 0{
+                                if self.questionaire_name == Last_assessment{
+                                    Question_ref.setData(["ignoring":false, "remaining":remaining, "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                                }else{
+                                    Question_ref.setData(["ignoring":false, "remaining":(remaining-1), "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                                }
+                            }else{
+                                Question_ref.setData(["ignoring":true, "remaining":self.user_skip_period, "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                            }
+                        }
+                    }else{
+                        if Last_ans != Answer{
+                        print(Last_ans)
+                        print(Answer)
+                            Question_ref.setData(["ignoring":false, "remaining":self.user_skip_Comfirm_period, "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                        }else{
+                            if remaining > 0{
+                                if self.questionaire_name == Last_assessment{
+                                    Question_ref.setData(["ignoring":true, "remaining":remaining, "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                                }else{
+                                    Question_ref.setData(["ignoring":true, "remaining":(remaining-1), "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                                }
+                            }else{
+                                Question_ref.setData(["ignoring":true, "remaining":self.user_skip_period, "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                            }
+                        }
+                    }
+                }else{
+                    Question_ref.setData(["ignoring":false, "remaining":self.user_skip_Comfirm_period, "Last_answer":Answer, "Last_assessment":self.questionaire_name!,"next":next, "Question_body":Question_body])
+                    
+                }
+            }
+        }
+    }
+    
+    func load_skipping(Questionid:String){
+        print("add order: \(Questionid)")
+        self.add_Order(Questionid){
+            if Questionid != "end"{
+                self.question_list.append(Questionid)
+            }
+        print(self.question_list)
+            let Question_ref = self.db.collection("logs").document(self.uid!).collection("Q_ignore").document(Questionid)
+        Question_ref.getDocument{(document,error)in
+            if let document = document{
+            if let data = document.data(){
+                    let ignoring = data["ignoring"] as! Bool
+                    let remaining = data["remaining"] as! Int
+                    let Last_ans = data["Last_answer"] as! String
+                    let Last_assessment = data["Last_assessment"] as! String
+                    let next = data["next"] as! String
+                    let Question_body = data["Question_body"] as! String
+                
+                    print("[info at load_skipping]: Questionid:\(Questionid), ignoring: \(ignoring), remaining: \(remaining)")
+                if ignoring == true && remaining > 0{
+                    self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document(Questionid).setData(["Type":"skipped","QuestionBody":Question_body, "AnswerBody": Last_ans])
+                    
+                    self.skip_updater(Questionid: Questionid, Answer: Last_ans, next: next, Question_body: Question_body)
+                    
+                    if next == "end"{
+                        self.next(next)
+                    }else{
+                        self.load_skipping(Questionid: next)
+                    }
+                }else{
+                    self.QuestionProcess(Questionid: Questionid)
+                }
+            }else{
+                print("[info at load_skipping]: Questionid:\(Questionid), Info not available")
+                self.QuestionProcess(Questionid: Questionid)
+                }
+            }else{
+                print("[info at load_skipping]: Questionid:\(Questionid), Info not available")
+                self.QuestionProcess(Questionid: Questionid)
+            }
+            
+        }
+        }
+    }
+
     func Type_selector(Questionid:String, Type: String){
         //put question into different user interface
         if Type == "11choices"{
@@ -116,8 +226,20 @@ class QuestionGenerator: UIViewController {
             self.next(id)
         }
         //go to the first question in the queue
-        self.QuestionProcess(Questionid: id)
+        self.load_skipping(Questionid: id)
     }
+    
+    func result_page(){
+        let Result = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Result") as! ResultViewController
+        self.addChild(Result)
+        Result.view.frame = self.view.frame
+        Result.uid = self.uid
+        Result.TimeChoice = self.questionaire_name
+        self.view.addSubview(Result.view)
+        Result.didMove(toParent: self )
+    }
+    
+
     
     //directly go to the next question
     func next(_ next: String){
@@ -125,26 +247,18 @@ class QuestionGenerator: UIViewController {
             if self.next_q.count != 0{
                 Ask_from_queue()
             }else{
-                print("here")
-                self.next_q.insert(next, at: 0)
-                print(self.next_q)
-                Set_next_q(self.next_q)
-                self.next_q.remove(at: 0)
-                let Result = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Result") as! ResultViewController
-                self.addChild(Result)
-                Result.view.frame = self.view.frame
-                Result.uid = self.uid
-                Result.TimeChoice = self.questionaire_name
-                self.view.addSubview(Result.view)
-                Result.didMove(toParent: self )
+                let ToHistory = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Goback") as! GoBackViewController
+                ToHistory.uid = self.uid
+                ToHistory.TimeChoice = self.questionaire_name!
+                ToHistory.end_flag = true
+                self.addChild(ToHistory)
+                self.view.addSubview(ToHistory.view)
             }
         }else{
-            print("here")
             self.next_q.insert(next, at: 0)
-            print(self.next_q)
             Set_next_q(self.next_q)
             self.next_q.remove(at: 0)
-            self.QuestionProcess(Questionid: next)
+            self.load_skipping(Questionid: next)
         }
     }
     
@@ -200,7 +314,8 @@ class QuestionGenerator: UIViewController {
     }
     
 
-    func add_Order(_ order:String){
+    func add_Order(_ order:String,completion:@escaping ()->()){
+        if order != "end"{
         let ref = self.db.collection("logs").document(self.uid!).collection(self.questionaire_name!).document("Order")
         ref.getDocument{(document,error)in
             if let document = document{
@@ -217,6 +332,10 @@ class QuestionGenerator: UIViewController {
                     ref.setData(["Order":Order], merge: true)
                 }
             }
+            completion()
+        }
+        }else{
+            completion()
         }
     }
     
@@ -226,7 +345,6 @@ class QuestionGenerator: UIViewController {
             if let document = document{
                 if let data = document.data(){
                     if var Order = data["Order"] as! [String]?{
-                        print(Order)
                         Order.removeLast()
                         ref.setData(["Order":Order], merge: true)
                     }
@@ -272,7 +390,6 @@ class QuestionGenerator: UIViewController {
         let ToHistory = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Goback") as! GoBackViewController
         ToHistory.uid = self.uid
         ToHistory.TimeChoice = self.questionaire_name!
-        print(self.questionaire_name!)
         self.addChild(ToHistory)
         self.view.addSubview(ToHistory.view)
     }

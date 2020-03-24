@@ -13,6 +13,7 @@ import FirebaseFirestore
 class GoBackViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
 
     @IBOutlet weak var CollectionView: UICollectionView!
+    @IBOutlet weak var Button: UIButton!
     
     @IBOutlet weak var Label: UILabel!
     var uid:String?
@@ -21,9 +22,9 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
     var Question:[String] = []
     var Q_A:[String:String] = [:]
     var Q_body:[String:String] = [:]
-    var Q_Abody: [String:String] = [:]
     var Q_index:[Int:String] = [:]
     var celllist:[Int:Bool] = [:]
+    var skippingList:[String:Bool] = [:]
     
     //collection View
     var collectionViewFlowLayout: UICollectionViewFlowLayout!
@@ -31,14 +32,31 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
     //collection view cell identifier
     let cellIdentifier = "cell"
     
+    var end_flag:Bool?
+    
+    var user_ignoring:Bool = false
+    var user_skip_Comfirm_period = 4
+    var user_skip_period = 4
+    
     //init firestore and firebase storage
     let db = Firestore.firestore()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let uid = Auth.auth().currentUser?.uid
+        if let uid = Auth.auth().currentUser?.uid{
+            self.uid = uid
+            get_skipper_para(user_id: uid)
+        }
+        
+        
+        
+        if self.end_flag == true{
+            self.Button.setTitle("Submit!", for: .normal)
+        }
         
         let Collection_ref = db.collection("logs").document(self.uid!).collection(self.TimeChoice!)
+        
         
         Collection_ref.getDocuments{(snapshot,error)in
             if let error = error{
@@ -48,20 +66,25 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
                         for document in snapshot!.documents{
                             let data = document.data()
                             if(document.documentID != "Recommendations" && document.documentID != "Order"){
+                                print(document.documentID)
                                 self.Q_body[document.documentID] = data["QuestionBody"] as! String
                                 self.Q_A[document.documentID] = data["AnswerBody"] as! String
+                                if data["Type"] as! String == "skipped"{
+                                    self.skippingList[document.documentID] = true
+                                }else{
+                                    self.skippingList[document.documentID] = false
+                                }
                             }else if(document.documentID == "Order"){
                                 self.Question = data["Order"] as! [String]
                             }
                         }
                     print("Questions:")
                     var count = 0
-                    self.Question.removeLast()
+                    //self.Question.removeLast()
                     for index in self.Question{
                         self.Q_index[count] = index
                         print(index)
                         count+=1
-                        print("Question id: \(index), Question: \(self.Q_body[index]!)")
                     }
                     
                     if(count == 0){
@@ -79,6 +102,65 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
             }
     }
     
+    func get_skipper_para(user_id:String){
+        let skipper_para = db.collection("logs").document(self.uid!)
+        skipper_para.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    self.user_ignoring = data["skip"] as! Bool
+                    self.user_skip_Comfirm_period = data["skip_Conform_period"] as! Int
+                    self.user_skip_period = data["skip_period"] as! Int
+                }
+            }
+        }
+    }
+    
+    func skip_updater(Questionid:String, Answer:String, next:String, Question_body:String){
+        let Question_ref = db.collection("logs").document(self.uid!).collection("Q_ignore").document(Questionid)
+        Question_ref.getDocument{(document,error)in
+            if let document = document{
+                if let data = document.data(){
+                    let ignoring = data["ignoring"] as! Bool
+                    let remaining = data["remaining"] as! Int
+                    let Last_ans = data["Last_answer"] as! String
+                    let Last_assessment = data["Last_assessment"] as! String
+                    
+                    if ignoring == false{
+                        if Last_ans != Answer{
+                            Question_ref.setData(["ignoring":false, "remaining":self.user_skip_Comfirm_period, "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                        }else{
+                            if remaining > 0{
+                                if self.TimeChoice == Last_assessment{
+                                    Question_ref.setData(["ignoring":false, "remaining":remaining, "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                                }else{
+                                    Question_ref.setData(["ignoring":false, "remaining":(remaining-1), "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                                }
+                            }else{
+                                Question_ref.setData(["ignoring":true, "remaining":self.user_skip_period, "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                            }
+                        }
+                    }else{
+                        if Last_ans != Answer{
+                            Question_ref.setData(["ignoring":false, "remaining":self.user_skip_Comfirm_period, "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                        }else{
+                            if remaining > 0{
+                                if self.TimeChoice == Last_assessment{
+                                    Question_ref.setData(["ignoring":true, "remaining":remaining, "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                                }else{
+                                    Question_ref.setData(["ignoring":true, "remaining":(remaining-1), "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                                }
+                            }else{
+                                Question_ref.setData(["ignoring":true, "remaining":self.user_skip_period, "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                            }
+                        }
+                    }
+                }else{
+                    Question_ref.setData(["ignoring":false, "remaining":self.user_skip_Comfirm_period, "Last_answer":Answer, "Last_assessment":self.TimeChoice!,"next":next, "Question_body":Question_body])
+                    
+                }
+            }
+        }
+    }
     
     // Question generate Selector
     func QuestionProcess(Questionid:String){
@@ -141,14 +223,17 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
     @IBAction func GoBack(_ sender: UIButton) {
         let temp = self.parent as! QuestionGenerator
         self.view.removeFromSuperview()
-        temp.from_history()
+        if self.end_flag == true{
+            temp.result_page()
+        }else{
+            temp.from_history()
+        }
     }
     
     //For collection View
     private func setupCollectionView(){
         CollectionView.delegate = self
         CollectionView.dataSource = self
-        
     }
     
     //set parameters for collection view items
@@ -183,7 +268,11 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
         print(indexPath.item)
         print(self.Q_index[indexPath.item]!)
         cell.TextLabel.text = self.Q_body[self.Q_index[indexPath.item]!]! + "\n" + self.Q_A[self.Q_index[indexPath.item]!]!
-
+        
+        if self.skippingList[self.Q_index[indexPath.item]!]! == false{
+            self.celllist[indexPath.item] = true
+        }
+        
         if let celltemp = self.celllist[indexPath.item]{
             if celltemp == true{
                 cell.backgroundColor = UIColor.init(red: 62/255, green: 109/255, blue: 63/255, alpha: 1)
@@ -191,7 +280,6 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
                 cell.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
             }
         }else{
-            self.celllist[indexPath.item] = false
             cell.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         }
         cell.TextLabel.textColor = .black
@@ -201,12 +289,6 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(self.Q_index[indexPath.item]!)
-//        let cellTemp = self.celllist[indexPath.item]
-//        if cellTemp == true{
-//            self.celllist[indexPath.item] = false
-//        }else{
-//            self.celllist[indexPath.item] = true
-//        }
         self.QuestionProcess(Questionid: self.Q_index[indexPath.item]!)
         collectionView.reloadItems(at: [indexPath])
         

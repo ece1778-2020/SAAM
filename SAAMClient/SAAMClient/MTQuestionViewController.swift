@@ -110,8 +110,13 @@ class MTQuestionViewController: UIViewController {
         if (self.parent as? QuestionGenerator) != nil{
             let temp = self.parent as! QuestionGenerator
             self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Type":"MC","answer":answer])
-            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer], "QuestionBody":self.body.text], merge: true)
+            self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer]!, "QuestionBody":self.body.text!], merge: true)
+            
+
+            
+                
             let clsDic = self.ClassDic[answer]
+            temp.skip_updater(Questionid: self.Questionid!, Answer: self.mapbutton[answer]!,next: clsDic!["next"] as! String, Question_body:self.body.text!)
             if let recommendations = clsDic!["Recommendations"]{
             self.db.collection("logs").document(temp.uid!).collection(temp.questionaire_name!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
                 for recommendation in recommendations as! [String]{
@@ -131,14 +136,14 @@ class MTQuestionViewController: UIViewController {
         }else if(self.parent as? GoBackViewController) != nil{
             let temp = self.parent as! GoBackViewController
             self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Type":"MC","answer":answer])
-            self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer], "QuestionBody":self.body.text], merge: true)
+            self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":self.mapbutton[answer]!, "QuestionBody":self.body.text!], merge: true)
             let clsDic = self.ClassDic[answer]
             
             if let recommendations = clsDic!["Recommendations"]{
             self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["Recommendations":recommendations], merge: true)
-                for recommendation in recommendations as! [String]{
-                }
             }
+            
+            temp.skip_updater(Questionid: self.Questionid!, Answer: self.mapbutton[answer]!,next: clsDic!["next"] as! String,  Question_body:self.body.text!)
             
             temp.Q_A[self.Questionid!] = self.mapbutton[answer]
             temp.CollectionView.reloadData()

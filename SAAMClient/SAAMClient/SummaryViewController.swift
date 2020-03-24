@@ -22,6 +22,8 @@ class SummaryViewController: UIViewController {
     var Q_body:[String:String] = [:]
     var Q_Abody: [String:String] = [:]
     var Recommendations_dic:[String:[String]] = [:]
+    var recommendations:String = ""
+    var questions_and_answer = ""
     
     @IBOutlet weak var Assessment_Time: UILabel!
     @IBOutlet weak var TextView: UITextView!
@@ -74,14 +76,16 @@ class SummaryViewController: UIViewController {
     
     func RecommendationProcessing(){
         if self.Recommendations.count != 0{
-            self.TextView.text = self.TextView.text  +  "\n\n" + "Recommendations:" + "\n"
+            self.TextView.text = self.TextView.text   + "Recommendations:" + "\n"
+            self.recommendations = self.recommendations  + "Recommendations:" + "\n"
             var index = 1
             for recommendation in self.Recommendations{
                 self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
                 index += 1
+                self.recommendations = self.recommendations + "\n" + String(index)+". " + recommendation + "\n"
             }
             // add the segment
-            self.TextView.text = self.TextView.text + "----------------------------------------" + "-----------------------" + "\n"
+            self.TextView.text = self.TextView.text + "----------------------------------------"  + "\n"
         }
     }
     
@@ -91,9 +95,10 @@ class SummaryViewController: UIViewController {
     
     func QAProcessing(){
         self.TextView.text = self.TextView.text + "\n" + "Your Answers:" + "\n"
+        self.questions_and_answer = self.questions_and_answer + "\n" + "Your Answers:" + "\n"
         for id in self.Question{
             let A = id + ". " + self.Q_body[id]! + "\n \n" + self.Q_A[id]!
-            
+            self.questions_and_answer = self.questions_and_answer + "\n" + A + "\n"
             self.TextView.text = self.TextView.text + "\n" + A + "\n"
         }
     }
@@ -113,7 +118,7 @@ class SummaryViewController: UIViewController {
         let title = date
         if let body = TextView.text{
             print("there")
-            let pdfCreator = PDFCreator(title: title, Body: body)
+            let pdfCreator = PDFCreator(title: title, Recommendations:self.recommendations, Questions: self.questions_and_answer)
             vc.documentData = pdfCreator.createFlyer()
         }
         }
