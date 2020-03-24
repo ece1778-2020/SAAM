@@ -322,9 +322,9 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
             cell.TextLabel.textColor = .black
             cell.TextLabel.halfTextColorChange(fullText: cell.TextLabel.text!, changeText: self.Q_A[self.Q_index[indexPath.item]!]!)
         }else{
-            cell.TextLabel.text = self.Q_body[self.Q_index[indexPath.item]!]! + "\n" + "Skipped"
+            cell.TextLabel.text = self.Q_body[self.Q_index[indexPath.item]!]! + "\n" + "Skipped. It was assumed that:\n" + self.Q_A[self.Q_index[indexPath.item]!]!
             cell.TextLabel.textColor = .black
-            cell.TextLabel.halfTextColorChange(fullText: cell.TextLabel.text!, changeText: "Skipped")
+            cell.TextLabel.halfTextColorChange(fullText: cell.TextLabel.text!, changeText: "Skipped. It was assumed that:\n" + self.Q_A[self.Q_index[indexPath.item]!]!)
         }
         
         if let celltemp = self.celllist[indexPath.item]{
