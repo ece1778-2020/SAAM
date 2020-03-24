@@ -243,8 +243,8 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
             let lineSpacing: CGFloat = 20
             let interItemSpacing: CGFloat = 5
             
-            var width:CGFloat = (CollectionView.frame.width - (numberOfItemsForRow-1)*interItemSpacing)/numberOfItemsForRow
-            var height:CGFloat = 300
+            let width:CGFloat = (CollectionView.frame.width - (numberOfItemsForRow-1)*interItemSpacing)/numberOfItemsForRow
+            let height:CGFloat = 300
             
             
             collectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -267,10 +267,16 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         print(indexPath.item)
         print(self.Q_index[indexPath.item]!)
-        cell.TextLabel.text = self.Q_body[self.Q_index[indexPath.item]!]! + "\n" + self.Q_A[self.Q_index[indexPath.item]!]!
         
         if self.skippingList[self.Q_index[indexPath.item]!]! == false{
             self.celllist[indexPath.item] = true
+            cell.TextLabel.text = self.Q_body[self.Q_index[indexPath.item]!]! + "\n" + self.Q_A[self.Q_index[indexPath.item]!]!
+            cell.TextLabel.textColor = .black
+            cell.TextLabel.halfTextColorChange(fullText: cell.TextLabel.text!, changeText: self.Q_A[self.Q_index[indexPath.item]!]!)
+        }else{
+            cell.TextLabel.text = self.Q_body[self.Q_index[indexPath.item]!]! + "\n" + "Skipped"
+            cell.TextLabel.textColor = .black
+            cell.TextLabel.halfTextColorChange(fullText: cell.TextLabel.text!, changeText: "Skipped")
         }
         
         if let celltemp = self.celllist[indexPath.item]{
@@ -282,8 +288,6 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
         }else{
             cell.backgroundColor = UIColor.gray.withAlphaComponent(0.5)
         }
-        cell.TextLabel.textColor = .black
-        cell.TextLabel.halfTextColorChange(fullText: cell.TextLabel.text!, changeText: self.Q_A[self.Q_index[indexPath.item]!]!)
         return cell
     }
     
