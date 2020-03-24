@@ -1520,40 +1520,104 @@
             <objects>
                 <viewController id="2Z8-cI-twM" customClass="TrendsViewController" customModule="SAAMClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cbS-h7-8js">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="1700"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLb-jq-Yra">
-                                <rect key="frame" x="20" y="54" width="64" height="33"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="ixW-Et-qhp">
+                                <rect key="frame" x="0.0" y="20" width="414" height="1660"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wOf-QG-6yr">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1700"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SGK-fw-pay">
+                                                <rect key="frame" x="8" y="17" width="46" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="46" id="DAi-yM-PrA"/>
+                                                    <constraint firstAttribute="height" constant="30" id="Fza-TO-pmd"/>
+                                                </constraints>
+                                                <state key="normal" title="Back"/>
+                                                <connections>
+                                                    <action selector="GetBack:" destination="2Z8-cI-twM" eventType="touchUpInside" id="ccs-Ec-8YX"/>
+                                                </connections>
+                                            </button>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xwC-8k-TZg" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="62" y="469" width="270" height="171"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m1Z-Tb-03W" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="62" y="702" width="270" height="181"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wRh-Mi-LlS" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="62" y="955" width="270" height="167"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7a1-Uj-dIl" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="62" y="1204" width="270" height="181"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="F6d-M6-dar" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="62" y="1463" width="270" height="184"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rGR-7W-VcP" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="62" y="255" width="270" height="172"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Orz-Xi-F0c" customClass="LineChartView" customModule="Charts">
+                                                <rect key="frame" x="62" y="67" width="270" height="143"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1700" id="iUi-QY-bzc"/>
+                                            <constraint firstItem="SGK-fw-pay" firstAttribute="top" secondItem="wOf-QG-6yr" secondAttribute="top" constant="17" id="kme-XN-1ud"/>
+                                            <constraint firstItem="SGK-fw-pay" firstAttribute="leading" secondItem="wOf-QG-6yr" secondAttribute="leading" constant="8" id="peO-MH-oly"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="33" id="7Wq-eS-i7B"/>
-                                    <constraint firstAttribute="width" constant="64" id="Ysn-Nz-UG2"/>
+                                    <constraint firstItem="wOf-QG-6yr" firstAttribute="leading" secondItem="ixW-Et-qhp" secondAttribute="leading" id="4cR-1H-d5R"/>
+                                    <constraint firstItem="wOf-QG-6yr" firstAttribute="trailing" secondItem="ixW-Et-qhp" secondAttribute="trailing" id="RDb-OL-CJJ"/>
+                                    <constraint firstItem="wOf-QG-6yr" firstAttribute="top" secondItem="ixW-Et-qhp" secondAttribute="top" id="dVP-B2-kE4"/>
+                                    <constraint firstAttribute="bottom" secondItem="wOf-QG-6yr" secondAttribute="bottom" constant="20" symbolic="YES" id="xZv-h3-ABN"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <state key="normal" title="Back">
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="BacktoProfile:" destination="2Z8-cI-twM" eventType="touchUpInside" id="s3B-Po-HZM"/>
-                                </connections>
-                            </button>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fLb-jq-Yra" firstAttribute="top" secondItem="U7e-gq-BWk" secondAttribute="top" constant="10" id="Djy-h4-zL0"/>
-                            <constraint firstItem="fLb-jq-Yra" firstAttribute="leading" secondItem="U7e-gq-BWk" secondAttribute="leading" constant="20" id="vDT-bH-4d6"/>
+                            <constraint firstAttribute="bottom" secondItem="ixW-Et-qhp" secondAttribute="bottom" constant="20" symbolic="YES" id="8Sz-r0-bYS"/>
+                            <constraint firstItem="ixW-Et-qhp" firstAttribute="trailing" secondItem="U7e-gq-BWk" secondAttribute="trailing" id="HmW-Cb-ue7"/>
+                            <constraint firstItem="ixW-Et-qhp" firstAttribute="leading" secondItem="U7e-gq-BWk" secondAttribute="leading" id="Lfm-ma-heX"/>
+                            <constraint firstItem="ixW-Et-qhp" firstAttribute="top" secondItem="cbS-h7-8js" secondAttribute="top" constant="20" symbolic="YES" id="g5A-rZ-Riz"/>
+                            <constraint firstItem="wOf-QG-6yr" firstAttribute="width" secondItem="cbS-h7-8js" secondAttribute="width" id="sVO-6y-MO2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="U7e-gq-BWk"/>
                     </view>
+                    <size key="freeformSize" width="414" height="1700"/>
                     <connections>
+                        <outlet property="G1" destination="Orz-Xi-F0c" id="eD3-y8-NhX"/>
+                        <outlet property="G2" destination="rGR-7W-VcP" id="TCj-7L-NjN"/>
+                        <outlet property="G3" destination="xwC-8k-TZg" id="Jtm-f3-cF7"/>
+                        <outlet property="G4" destination="m1Z-Tb-03W" id="Ezn-7b-dox"/>
+                        <outlet property="G5" destination="wRh-Mi-LlS" id="NOF-Ex-5Iv"/>
+                        <outlet property="G6" destination="7a1-Uj-dIl" id="JR0-PQ-WTc"/>
+                        <outlet property="G7" destination="F6d-M6-dar" id="kek-Q9-dpE"/>
                         <segue destination="dZH-VK-en6" kind="presentation" identifier="TrendBackProfile" modalPresentationStyle="fullScreen" id="khP-yg-mx7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="laf-gT-dDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-743.47826086956525" y="3103.7946428571427"/>
+            <point key="canvasLocation" x="-713.04347826086962" y="3276.5625"/>
         </scene>
         <!--Skip Para View Controller-->
         <scene sceneID="aZt-sK-Trw">
@@ -1693,7 +1757,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9Pn-Sp-hVM"/>
-        <segue reference="hE9-qc-t8O"/>
+        <segue reference="khP-yg-mx7"/>
         <segue reference="e9h-Qu-h6v"/>
     </inferredMetricsTieBreakers>
 </document>
