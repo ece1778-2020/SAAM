@@ -1551,13 +1551,8 @@
         <image name="printer" catalog="system" width="64" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-        <segue reference="9Pn-Sp-hVM"/>
-        <segue reference="khP-yg-mx7"/>
-=======
         <segue reference="fXI-WE-O3k"/>
         <segue reference="7yI-kX-B5s"/>
->>>>>>> 7c4d2f6c73bd979883cc16f49f607b4d5a149864
         <segue reference="e9h-Qu-h6v"/>
     </inferredMetricsTieBreakers>
 </document>
