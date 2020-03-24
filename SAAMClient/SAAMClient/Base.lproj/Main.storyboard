@@ -1520,13 +1520,38 @@
                     <view key="view" contentMode="scaleToFill" id="cbS-h7-8js">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLb-jq-Yra">
+                                <rect key="frame" x="20" y="54" width="64" height="33"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="33" id="7Wq-eS-i7B"/>
+                                    <constraint firstAttribute="width" constant="64" id="Ysn-Nz-UG2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="BacktoProfile:" destination="2Z8-cI-twM" eventType="touchUpInside" id="s3B-Po-HZM"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="secondarySystemGroupedBackgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="fLb-jq-Yra" firstAttribute="top" secondItem="U7e-gq-BWk" secondAttribute="top" constant="10" id="Djy-h4-zL0"/>
+                            <constraint firstItem="fLb-jq-Yra" firstAttribute="leading" secondItem="U7e-gq-BWk" secondAttribute="leading" constant="20" id="vDT-bH-4d6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="U7e-gq-BWk"/>
                     </view>
+                    <connections>
+                        <segue destination="dZH-VK-en6" kind="presentation" identifier="TrendBackProfile" modalPresentationStyle="fullScreen" id="khP-yg-mx7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="laf-gT-dDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-743" y="3104"/>
+            <point key="canvasLocation" x="-743.47826086956525" y="3103.7946428571427"/>
         </scene>
     </scenes>
     <resources>
@@ -1539,7 +1564,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9Pn-Sp-hVM"/>
-        <segue reference="Fy4-DA-j2B"/>
+        <segue reference="khP-yg-mx7"/>
         <segue reference="e9h-Qu-h6v"/>
     </inferredMetricsTieBreakers>
 </document>
