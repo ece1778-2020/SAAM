@@ -293,6 +293,7 @@ PODS:
   - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
+  - BoringSSL-GRPC (= 0.0.3)
   - Charts
   - Firebase/Analytics
   - Firebase/Auth
@@ -300,6 +301,7 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - FirebaseFirestoreSwift
+  - gRPC-Core (= 1.21.0)
   - TinyConstraints
 
 SPEC REPOS:
@@ -359,6 +361,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: a7461662290cd443ecc8e4371c475847eb8770e8
+PODFILE CHECKSUM: 99ac3314f836dd4436acd6d67bbac2e6d17e22bb
 
-COCOAPODS: 1.9.0
+COCOAPODS: 1.9.0.beta.2
