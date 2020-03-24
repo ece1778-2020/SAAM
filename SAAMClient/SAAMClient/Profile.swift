@@ -42,6 +42,22 @@ class Profile: UIViewController,UITextFieldDelegate {
     //init firestore and firebase storage
     let db = Firestore.firestore()
     
+    @IBAction func Skip(_ sender: UIButton) {
+        let skipView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SkipPara") as! SkipParaViewController
+        self.addChild(skipView)
+        skipView.view.frame = self.view.frame
+        self.view.addSubview(skipView.view)
+        skipView.didMove(toParent: self )
+    }
+    
+    func Skip(){
+        let skipView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SkipPara") as! SkipParaViewController
+        self.addChild(skipView)
+        skipView.view.frame = self.view.frame
+        self.view.addSubview(skipView.view)
+        skipView.didMove(toParent: self )
+    }
+    
     @IBAction func Summaries(_ sender: UIButton) {
         
         performSegue(withIdentifier: "ToSummary", sender: self)
@@ -62,20 +78,27 @@ class Profile: UIViewController,UITextFieldDelegate {
     
     @IBAction func AssessmentButton(_ sender: UIButton) {
         //Go to Question Generator
+        
         let ref = self.db.collection("logs").document(self.uid!)
         ref.getDocument{(document,error)in
             if let document = document{
                 if let data = document.data(){
-                    if let Current = data["Current"] as! String?{
+                    
+                    if data["skip"] == nil{
+                        self.Skip()
+                    }else if let Current = data["Current"] as! String?{
                         if Current != "None"{
                             if let next = data["next_q"] as! [String]?{
                                 self.Asking_alert("Do you want to continue your Assessment at \(self.TimeStampFormatter(StrTimeStamp: Current))?", next, Current)
                             }
                         }
+                        self.performSegue(withIdentifier: "ToQG", sender: self)
+                    }else{
+                        self.performSegue(withIdentifier: "ToQG", sender: self)
                     }
                 }
             }
-            self.performSegue(withIdentifier: "ToQG", sender: self)
+            self.Skip()
         }
     }
     

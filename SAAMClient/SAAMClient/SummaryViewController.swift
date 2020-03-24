@@ -81,8 +81,8 @@ class SummaryViewController: UIViewController {
             var index = 1
             for recommendation in self.Recommendations{
                 self.TextView.text = self.TextView.text + "\n" + String(index)+". " + recommendation + "\n"
-                index += 1
                 self.recommendations = self.recommendations + "\n" + String(index)+". " + recommendation + "\n"
+                index += 1
             }
             // add the segment
             self.TextView.text = self.TextView.text + "----------------------------------------"  + "\n"

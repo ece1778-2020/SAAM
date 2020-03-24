@@ -146,7 +146,7 @@ class MTQuestionViewController: UIViewController {
             temp.skip_updater(Questionid: self.Questionid!, Answer: self.mapbutton[answer]!,next: clsDic!["next"] as! String,  Question_body:self.body.text!)
             
             temp.Q_A[self.Questionid!] = self.mapbutton[answer]
-            temp.CollectionView.reloadData()
+            temp.update_color()
             self.view.removeFromSuperview()
         }
         

@@ -168,7 +168,7 @@ class ElevenChoicesViewController: UIViewController {
         self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":explainText], merge: true)
             
             temp.Q_A[self.Questionid!] = explainText
-            temp.CollectionView.reloadData()
+            temp.update_color()
             self.view.removeFromSuperview()
         }
     }

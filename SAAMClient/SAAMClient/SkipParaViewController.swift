@@ -26,12 +26,15 @@ class SkipParaViewController: UIViewController {
         if let uid = Auth.auth().currentUser?.uid {
             self.uid = uid;
         }
+        skip_period.delegate = self
+        skip_Conform_period.delegate = self
+        print("here")
         skip_period.text = String(10)
         skip_Conform_period.text = String(10)
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event:UIEvent?){
-        self.view.endEditing(true)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(false)
     }
     
     //init firestore and firebase storage
@@ -39,32 +42,38 @@ class SkipParaViewController: UIViewController {
     
     @IBAction func submit(_ sender: Any) {
         self.db.collection("logs").document(self.uid!).setData(["skip":true, "skip_Conform_period": Int(self.skip_Conform_period.text!)!, "skip_period": Int(self.skip_period.text!)!], merge: true)
+
+        self.view.removeFromSuperview()
     }
     
     @IBAction func Not_skip(_ sender: Any) {
         self.db.collection("logs").document(self.uid!).setData(["skip":false, "skip_Conform_period":10, "skip_period": 10], merge: true)
+
+        self.view.removeFromSuperview()
     }
     
 }
 
 //Helper function for textfields
-extension SkipParaViewController : UITextViewDelegate{
+extension SkipParaViewController : UITextFieldDelegate{
     
-    func textViewShouldReturn(_ textView: UITextView) -> Bool {
-        textView.resignFirstResponder()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
-            textView.text = nil
-            textView.textColor = UIColor.black
-        }
-    }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.textColor = UIColor.lightGray
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+        if textField.text == ""{
+            textField.text = String(10)
+        }else if let num = Int(textField.text!){
+            if num > 10{
+                textField.text = String(10)
+            }else if num < 1{
+                textField.text = String(1)
+            }
+        }else{
+            textField.text = String(10)
         }
     }
 }

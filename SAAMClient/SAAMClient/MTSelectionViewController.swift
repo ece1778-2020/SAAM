@@ -198,7 +198,7 @@ class MTSelectionViewController: UIViewController {
         temp.skip_updater(Questionid: self.Questionid!, Answer: answerbody, next: self.globalnext!, Question_body:self.body.text!)
         self.db.collection("logs").document(temp.uid!).collection(temp.TimeChoice!).document(self.Questionid!).setData(["AnswerBody":answerbody], merge: true)
         temp.Q_A[self.Questionid!] = answerbody
-        temp.CollectionView.reloadData()
+        temp.update_color()
         self.view.removeFromSuperview()
         }
     }

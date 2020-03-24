@@ -162,6 +162,54 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
     }
     
+    func update_color(){
+        let Collection_ref = db.collection("logs").document(self.uid!).collection(self.TimeChoice!)
+        
+        Collection_ref.getDocuments{(snapshot,error)in
+            if let error = error{
+                print(error.localizedDescription)
+            }else{
+                if snapshot != nil{
+                        for document in snapshot!.documents{
+                            let data = document.data()
+                            if(document.documentID != "Recommendations" && document.documentID != "Order"){
+                                print(document.documentID)
+                                self.Q_body[document.documentID] = data["QuestionBody"] as! String
+                                self.Q_A[document.documentID] = data["AnswerBody"] as! String
+                                if data["Type"] as! String == "skipped"{
+                                    self.skippingList[document.documentID] = true
+                                }else{
+                                    self.skippingList[document.documentID] = false
+                                }
+                            }else if(document.documentID == "Order"){
+                                self.Question = data["Order"] as! [String]
+                            }
+                        }
+                    print("Questions:")
+                    var count = 0
+                    //self.Question.removeLast()
+                    for index in self.Question{
+                        self.Q_index[count] = index
+                        print(index)
+                        count+=1
+                    }
+                    
+                    if(count == 0){
+                        self.Label.text = "You haven't done any questions"
+                    }
+                    
+
+                    self.setupCollectionView()
+                    self.setupCollectionViewItemSize()
+
+
+                    self.CollectionView.reloadData()
+                    
+                    }
+                }
+            }
+    }
+    
     // Question generate Selector
     func QuestionProcess(Questionid:String){
         //Classify questions
