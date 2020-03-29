@@ -98,7 +98,7 @@ class Profile: UIViewController,UITextFieldDelegate {
                     }
                 }
             }
-            self.Skip()
+            //self.Skip()
         }
     }
     
@@ -149,6 +149,8 @@ class Profile: UIViewController,UITextFieldDelegate {
         let strDate = dateFormatter.string(from: date)
         return strDate
     }
+    
+    
     
 
 }

@@ -49,8 +49,6 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
             get_skipper_para(user_id: uid)
         }
         
-        
-        
         if self.end_flag == true{
             self.Button.setTitle("Submit!", for: .normal)
         }
@@ -78,9 +76,12 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
                                 self.Question = data["Order"] as! [String]
                             }
                         }
+                    print(self.skippingList)
                     print("Questions:")
                     var count = 0
-                    //self.Question.removeLast()
+                    if self.skippingList[self.Question.last!] == nil{
+                        self.Question.removeLast()
+                    }
                     for index in self.Question{
                         self.Q_index[count] = index
                         print(index)
@@ -94,8 +95,6 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
 
                     self.setupCollectionView()
                     self.setupCollectionViewItemSize()
-
-                    
                     
                     }
                 }
@@ -315,8 +314,9 @@ class GoBackViewController: UIViewController, UICollectionViewDataSource, UIColl
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         print(indexPath.item)
         print(self.Q_index[indexPath.item]!)
+        print(self.skippingList[self.Q_index[indexPath.item]!])
         
-        if self.skippingList[self.Q_index[indexPath.item]!]! == false{
+        if self.skippingList[self.Q_index[indexPath.item]!] == false{
             self.celllist[indexPath.item] = true
             cell.TextLabel.text = self.Q_body[self.Q_index[indexPath.item]!]! + "\n" + self.Q_A[self.Q_index[indexPath.item]!]!
             cell.TextLabel.textColor = .black
